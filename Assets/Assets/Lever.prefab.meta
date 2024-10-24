@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bed4b15b829b7b34fa9f7451016b6a39
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 165323
+  packageName: Auto Hand - VR Interaction
+  packageVersion: 3.3.0
+  assetPath: Assets/AutoHand/Examples/Prefabs/Gadgets/Lever.prefab
+  uploadId: 639817

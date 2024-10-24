@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 84ada259ced381f4da5677db40cf6b6e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 165323
+  packageName: Auto Hand - VR Interaction
+  packageVersion: 3.3.0
+  assetPath: Assets/AutoHand/Examples/Prefabs/Demo/Auto Hand Rifle.prefab
+  uploadId: 639817

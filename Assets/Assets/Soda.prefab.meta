@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b3c6f7bf343873241aad98f4e2e62311
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 165323
+  packageName: Auto Hand - VR Interaction
+  packageVersion: 3.3.0
+  assetPath: Assets/AutoHand/Examples/Prefabs/Kitchen/Soda.prefab
+  uploadId: 639817
