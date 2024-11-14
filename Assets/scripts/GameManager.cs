@@ -21,13 +21,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            animator.SetTrigger("Give");
-        }
-
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (stateInfo.IsName("Give") && stateInfo.normalizedTime >= 1.0f)
-        {
-            animator.ResetTrigger("Give");
+            animator.CrossFade("Give", 0f);
         }
     }
 
