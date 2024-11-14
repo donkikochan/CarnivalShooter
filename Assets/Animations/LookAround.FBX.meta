@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: MCU_am_Stand_Idle_03_LookAround
+      name: LookAround
       takeName: Unreal Take
       internalID: 8993902097722301239
       firstFrame: 0
