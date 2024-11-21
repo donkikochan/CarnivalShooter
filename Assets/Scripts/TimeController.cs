@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class timeController : MonoBehaviour
+public class TimeController : MonoBehaviour
 {
     private int time;
     public TextMeshPro timeText;
@@ -42,9 +42,9 @@ public class timeController : MonoBehaviour
         UpdateTimeText(time);
     }
 
-    public void SetTime(int points)
+    public void SetTime(int time)
     {
-        time = points;
+        this.time = time;
         UpdateTimeText(time);
     }
 
