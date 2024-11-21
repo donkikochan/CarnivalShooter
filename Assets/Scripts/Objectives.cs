@@ -20,7 +20,7 @@ public class Objectives : MonoBehaviour
         SetPoints(50);
     }
 
-    private void OnShot()
+    public void OnShot()
     {
         scoreController.AddScore(points); // Sumar puntos
         Destroy(gameObject);         // Destruir el objetivo
