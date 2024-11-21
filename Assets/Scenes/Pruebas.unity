@@ -154,6 +154,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7322286460121584301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &145589878 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1375073929792207392, guid: 26ca7e36413352249b3df4ddf9c76308, type: 3}
+  m_PrefabInstance: {fileID: 1103933771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &145589889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145589878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c232a2f70ebaf46952b97e503b6e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitDecal: {fileID: 0}
+  hitParticle: {fileID: 0}
+  hitDecalLifetime: 0
+  OnShotEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1049448666}
+        m_TargetAssemblyTypeName: ScoreController, Assembly-CSharp
+        m_MethodName: AddScore
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &197475272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12016,7 +12051,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1375073929792207392, guid: 26ca7e36413352249b3df4ddf9c76308, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145589889}
   m_SourcePrefab: {fileID: 100100000, guid: 26ca7e36413352249b3df4ddf9c76308, type: 3}
 --- !u!1 &1108236047
 GameObject:
