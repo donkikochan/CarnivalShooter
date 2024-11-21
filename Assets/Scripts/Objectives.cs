@@ -20,14 +20,10 @@ public class Objectives : MonoBehaviour
         SetPoints(50);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnShot()
     {
-        if (other.CompareTag("Projectile")) // Asegúrate de etiquetar los disparos como "Projectile"
-        {
-            scoreController.AddScore(points); // Sumar puntos
-            Destroy(other.gameObject);   // Destruir el disparo
-            Destroy(gameObject);         // Destruir el objetivo
-        }
+        scoreController.AddScore(points); // Sumar puntos
+        Destroy(gameObject);         // Destruir el objetivo
     }
 
     private void SetPoints(int points)
