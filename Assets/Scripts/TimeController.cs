@@ -32,7 +32,7 @@ public class timeController : MonoBehaviour
 
     public void RemoveTime(int time)
     {
-        this.time -= points;
+        this.time -= time;
         UpdateTimeText(time);
     }
 
