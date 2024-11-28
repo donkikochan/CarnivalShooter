@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class Objectives : MonoBehaviour
 {
+    public float 
     private int points; // Puntos que otorga este objetivo al destruirse
     private ScoreController scoreController;
     private Animator animator;
+    private bool gotShoot = false;
 
     private void Start()
     {
@@ -22,26 +24,44 @@ public class Objectives : MonoBehaviour
 
     public void OnShot()
     {
+        if (gotShoot)
+            return;
+        
         // Sumar puntos al ScoreController
         scoreController.AddScore(points);
-
-        // Activar la animación
+        
+        // Activar la animación de cierre
         animator.SetTrigger("close");
 
-        // Obtener la duración del clip actual de animación
-        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
-        if (clipInfo.Length > 0)
-        {
-            float animationTime = clipInfo[0].clip.length;
+        // Obtener la duración de la animación `close`
+        float closeAnimationTime = GetAnimationClipLength("close");
 
+        if (closeAnimationTime > 0)
+        {
             // Destruir el objeto después de la animación
-            Invoke(nameof(DestroyAfterAnimation), animationTime);
+            Invoke(nameof(DestroyAfterAnimation), closeAnimationTime);
         }
         else
         {
-            Debug.LogWarning("No se encontró ningún clip de animación.");
-            DestroyAfterAnimation(); // Si no hay animación, destruir directamente
+            Debug.LogWarning("No se encontró el clip de animación 'close'.");
+            DestroyAfterAnimation(); // Destruir directamente si no se encuentra el clip
         }
+        
+        gotShoot = true;
+    }
+
+    private float GetAnimationClipLength(string clipName)
+    {
+        // Buscar en todos los clips del Animator
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+            {
+                return clip.length;
+            }
+        }
+
+        return 0f; // Retorna 0 si no se encuentra el clip
     }
 
     private void DestroyAfterAnimation()

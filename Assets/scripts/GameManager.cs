@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,37 +9,48 @@ public class GameManager : MonoBehaviour
     private Animator animator;
     public Transform[] spawnPoints;
     public GameObject prefab;
-    
+
+    // Lista para guardar los objetos instanciados
+    private List<GameObject> spawnedTargets = new List<GameObject>();
+
     void Start()
     {
         sc = scoreController.GetComponent<ScoreController>();
         animator = shopKeeper.GetComponent<Animator>();
 
-        for (int i = 0; i < spawnPoints.Length; i++)
-        {
-            SpawnAtPoint(i);
-        }
+        SpawnAll();
     }
-    
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
             animator.CrossFade("Give", 0f);
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            DestroyAll();
+            SpawnAll();
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            DestroyAll();
+        }
     }
-    
+
     // Método para instanciar en un punto aleatorio
     public void SpawnAtRandomPoint()
     {
         if (prefab != null && spawnPoints.Length > 0)
         {
-            // Elige un spawn point aleatorio
             int randomIndex = Random.Range(0, spawnPoints.Length);
             Transform spawnPoint = spawnPoints[randomIndex];
 
-            // Instancia el prefab en el spawn point
-            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+            // Instancia el prefab y guárdalo en la lista
+            GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+            spawnedTargets.Add(newObject);
         }
         else
         {
@@ -55,11 +64,38 @@ public class GameManager : MonoBehaviour
         if (prefab != null && index >= 0 && index < spawnPoints.Length)
         {
             Transform spawnPoint = spawnPoints[index];
-            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+
+            // Instancia el prefab y guárdalo en la lista
+            GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+            spawnedTargets.Add(newObject);
         }
         else
         {
             Debug.LogWarning("Índice inválido o prefab/spawn points no asignados.");
+        }
+    }
+
+    public void DestroyAll()
+    {
+        // Destruye todos los objetos en la lista
+        foreach (GameObject obj in spawnedTargets)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+
+        // Limpia la lista después de destruir los objetos
+        spawnedTargets.Clear();
+    }
+
+    public void SpawnAll()
+    {
+        foreach (Transform spawnPoint in spawnPoints)
+        {
+            GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+            spawnedTargets.Add(newObject);
         }
     }
 }

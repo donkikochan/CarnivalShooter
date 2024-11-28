@@ -29,6 +29,7 @@ public class ScoreController : MonoBehaviour
         score += points;
         //UpdateScoreText(score);
         Debug.Log("Punts" + score);
+        UpdateScoreText(score);
     }
 
     public void RemoveScore(int points)
