@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Objectives : MonoBehaviour
 {
-    public float 
+    public float duration = 5.0f; // Tiempo antes de que el objeto se destruya automáticamente
     private int points; // Puntos que otorga este objetivo al destruirse
     private ScoreController scoreController;
     private Animator animator;
-    private bool gotShoot = false;
+    private bool gotShot = false;
 
     private void Start()
     {
@@ -20,16 +20,19 @@ public class Objectives : MonoBehaviour
         }
 
         SetPoints(50);
+
+        // Inicia la destrucción automática después de 5 segundos
+        Invoke(nameof(DestroyAutomatically), duration);
     }
 
     public void OnShot()
     {
-        if (gotShoot)
+        if (gotShot)
             return;
-        
+
         // Sumar puntos al ScoreController
         scoreController.AddScore(points);
-        
+
         // Activar la animación de cierre
         animator.SetTrigger("close");
 
@@ -46,8 +49,8 @@ public class Objectives : MonoBehaviour
             Debug.LogWarning("No se encontró el clip de animación 'close'.");
             DestroyAfterAnimation(); // Destruir directamente si no se encuentra el clip
         }
-        
-        gotShoot = true;
+
+        gotShot = true;
     }
 
     private float GetAnimationClipLength(string clipName)
@@ -67,6 +70,26 @@ public class Objectives : MonoBehaviour
     private void DestroyAfterAnimation()
     {
         Destroy(gameObject);
+    }
+
+    private void DestroyAutomatically()
+    {
+        if (!gotShot)
+        {
+            // Si no fue destruido por un disparo, activa la animación de cierre antes de destruir
+            animator.SetTrigger("close");
+
+            float closeAnimationTime = GetAnimationClipLength("close");
+
+            if (closeAnimationTime > 0)
+            {
+                Invoke(nameof(DestroyAfterAnimation), closeAnimationTime);
+            }
+            else
+            {
+                DestroyAfterAnimation(); // Si no hay animación, destrúyelo directamente
+            }
+        }
     }
 
     private void SetPoints(int points)
