@@ -1,37 +1,90 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{
+    STATE_MENU,
+    STATE_BEGINGAME,
+    STATE_PLAYING,
+    STATE_ENDGAME
+}
+
 public class GameManager : MonoBehaviour
 {
-    public GameObject scoreController;
-    private ScoreController sc;
+    // Configuración de Prefabs
+    [Header("Prefabs")]
+    public GameObject bandido;
+    public GameObject armero;
+    public GameObject secuaz;
     public GameObject shopKeeper;
-    private Animator animator;
+
+    // Probabilidades de aparición
+    [Header("Probabilidades de Aparición")]
+    [Range(0, 100)] public int bandidoChance = 50;
+    [Range(0, 100)] public int armeroChance = 30;
+    [Range(0, 100)] public int secuazChance = 20;
+
+    // Configuración de puntos de spawn
+    [Header("Puntos de Spawn")]
     public Transform[] spawnPoints;
-    public GameObject prefab;
+
+    // Controladores
+    [Header("Controladores")]
+    public GameObject scoreController;
+
+    // Configuración de oleadas
+    [Header("Configuración de Oleadas")]
+    [Tooltip("Tiempo entre oleadas (segundos)")]
+    public float waveInterval = 10f; // Tiempo entre oleadas
+    [Tooltip("Cantidad de enemigos por oleada")]
+    public int enemiesPerWave = 5; // Enemigos por oleada
+    public float spawnDelay = 0.5f; // Retraso entre spawns individuales en una oleada
+
+    [Header("Game State")] 
+    public GameState gameState;
 
     // Lista para guardar los objetos instanciados
     private List<GameObject> spawnedTargets = new List<GameObject>();
+
+    // Control de puntos ocupados
+    private HashSet<int> occupiedSpawnPoints = new HashSet<int>();
+
+    private ScoreController sc;
+    private Animator animator;
 
     void Start()
     {
         sc = scoreController.GetComponent<ScoreController>();
         animator = shopKeeper.GetComponent<Animator>();
 
-        SpawnAll();
+        StartCoroutine(SpawnWaves());
     }
 
     void Update()
     {
+        switch (gameState)
+        {
+            case GameState.STATE_MENU:
+            {
+                break;
+            }
+            case GameState.STATE_BEGINGAME:
+            {
+                break;
+            }
+            case GameState.STATE_PLAYING:
+            {
+                break;
+            }
+            case GameState.STATE_ENDGAME:
+            {
+                break;
+            }
+        }
         if (Input.GetKeyDown(KeyCode.A))
         {
             animator.CrossFade("Give", 0f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            DestroyAll();
-            SpawnAll();
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -40,39 +93,100 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Método para instanciar en un punto aleatorio
-    public void SpawnAtRandomPoint()
+    // Corrutina para manejar oleadas
+    private IEnumerator SpawnWaves()
     {
-        if (prefab != null && spawnPoints.Length > 0)
+        while (true)
         {
-            int randomIndex = Random.Range(0, spawnPoints.Length);
-            Transform spawnPoint = spawnPoints[randomIndex];
-
-            // Instancia el prefab y guárdalo en la lista
-            GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-            spawnedTargets.Add(newObject);
-        }
-        else
-        {
-            Debug.LogWarning("Faltan prefabs o spawn points.");
+            yield return StartCoroutine(SpawnWave());
+            yield return new WaitForSeconds(waveInterval);
         }
     }
 
-    // Método opcional para instanciar en un punto específico
-    public void SpawnAtPoint(int index)
+    // Corrutina para generar una oleada
+    private IEnumerator SpawnWave()
     {
-        if (prefab != null && index >= 0 && index < spawnPoints.Length)
+        for (int i = 0; i < enemiesPerWave; i++)
         {
-            Transform spawnPoint = spawnPoints[index];
+            SpawnAtRandomPoint();
+            yield return new WaitForSeconds(spawnDelay);
+        }
+    }
 
-            // Instancia el prefab y guárdalo en la lista
-            GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-            spawnedTargets.Add(newObject);
+    // Método para instanciar en un punto aleatorio
+    public void SpawnAtRandomPoint()
+    {
+        if (spawnPoints.Length > 0)
+        {
+            int randomIndex = GetAvailableSpawnPoint();
+            if (randomIndex >= 0)
+            {
+                Transform spawnPoint = spawnPoints[randomIndex];
+                GameObject prefab = GetRandomPrefab();
+
+                // Instancia el prefab
+                GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+                spawnedTargets.Add(newObject);
+
+                // Marca el punto como ocupado
+                occupiedSpawnPoints.Add(randomIndex);
+
+                // Liberar el punto cuando el objeto se destruya
+                newObject.GetComponent<Objectives>().OnDestroyed += () => ReleaseSpawnPoint(randomIndex);
+            }
         }
         else
         {
-            Debug.LogWarning("Índice inválido o prefab/spawn points no asignados.");
+            Debug.LogWarning("Faltan spawn points.");
         }
+    }
+
+    // Método para obtener un prefab basado en las probabilidades
+    private GameObject GetRandomPrefab()
+    {
+        int totalChance = bandidoChance + armeroChance + secuazChance;
+        int randomValue = Random.Range(0, totalChance);
+
+        if (randomValue < bandidoChance)
+        {
+            return bandido;
+        }
+        else if (randomValue < bandidoChance + armeroChance)
+        {
+            return armero;
+        }
+        else
+        {
+            return secuaz;
+        }
+    }
+
+    // Método para obtener un índice de punto de spawn disponible
+    private int GetAvailableSpawnPoint()
+    {
+        List<int> availablePoints = new List<int>();
+
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            if (!occupiedSpawnPoints.Contains(i))
+            {
+                availablePoints.Add(i);
+            }
+        }
+
+        if (availablePoints.Count > 0)
+        {
+            return availablePoints[Random.Range(0, availablePoints.Count)];
+        }
+
+        Debug.LogWarning("No hay puntos de spawn disponibles.");
+        return -1;
+    }
+
+    // Método para liberar un punto de spawn
+    private void ReleaseSpawnPoint(int index)
+    {
+        occupiedSpawnPoints.Remove(index);
     }
 
     public void DestroyAll()
@@ -86,16 +200,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // Limpia la lista después de destruir los objetos
+        // Limpia la lista y los puntos ocupados
         spawnedTargets.Clear();
-    }
-
-    public void SpawnAll()
-    {
-        foreach (Transform spawnPoint in spawnPoints)
-        {
-            GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-            spawnedTargets.Add(newObject);
-        }
+        occupiedSpawnPoints.Clear();
     }
 }
