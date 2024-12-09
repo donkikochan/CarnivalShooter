@@ -5,23 +5,44 @@ using TMPro;
 
 public class TimeController : MonoBehaviour
 {
-    private int time;
+    public int time = 900;
+    private float currentTime;
     public TextMeshPro timeText;
+    
     // Start is called before the first frame update
     void Start()
     {
-        time = 0;
+        currentTime = time;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (HasEnded())
+            return;
         
+        SetTime((int)(currentTime -= Time.deltaTime));
+    }
+
+    public bool HasEnded()
+    {
+        // Convertimos a entero redondeando hacia abajo.
+        int displayTime = Mathf.CeilToInt(currentTime);
+
+        // Si el tiempo llega a 0 o menos.
+        if (displayTime <= 0)
+            return true;
+
+        return false;
     }
 
     public void UpdateTimeText(int time)
     {
-        timeText.text = time.ToString();
+        // Convertimos el tiempo en minutos y segundos.
+        int minutes = Mathf.FloorToInt(time / 60); // Minutos.
+        int seconds = Mathf.FloorToInt(time % 60); // Segundos restantes.
+        
+        timeText.text = $"{minutes:D2}:{seconds:D2}"; // D2 asegura siempre dos dígitos
     }
 
     public void AddTime(int time)
@@ -52,5 +73,4 @@ public class TimeController : MonoBehaviour
     {
         return time;
     }
-
 }
