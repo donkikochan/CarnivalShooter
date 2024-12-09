@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Autohand;
 using UnityEngine;
 
 public enum GameState
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
     // Configuración de puntos de spawn
     [Header("Puntos de Spawn")]
     public Transform[] spawnPoints;
+    public Transform[] coinSpawnPoints;
 
     // Controladores
     [Header("Controladores")]
@@ -51,6 +53,11 @@ public class GameManager : MonoBehaviour
     [Header("Game State")] 
     public GameState gameState;
 
+    [Header("Objects")] 
+    public PlacePoint coinPlacePoint;
+    public GameObject grabCoinText;
+    public GameObject[] coins;
+
     // Lista para guardar los objetos instanciados
     private List<GameObject> spawnedTargets = new List<GameObject>();
 
@@ -59,6 +66,9 @@ public class GameManager : MonoBehaviour
 
     private ScoreController sc;
     private Animator animator;
+    private GameObject[] instCoins = new GameObject[3];
+    private bool spawnCoins = true;
+    private bool deleteCoins = true;
 
     void Start()
     {
@@ -74,10 +84,26 @@ public class GameManager : MonoBehaviour
         {
             case GameState.STATE_MENU:
             {
+                // Instancia solo si no se han generado las monedas
+                if (!instCoins[0])
+                    instCoins[0] = Instantiate(coins[0], coinSpawnPoints[0].position, coinSpawnPoints[0].rotation);
+                if (!instCoins[1])
+                    instCoins[1] = Instantiate(coins[1], coinSpawnPoints[1].position, coinSpawnPoints[1].rotation);
+                if (!instCoins[2])
+                    instCoins[2] = Instantiate(coins[2], coinSpawnPoints[2].position, coinSpawnPoints[2].rotation);
+                
                 break;
             }
             case GameState.STATE_BEGINGAME:
             {
+                if (instCoins[0] != null && GetPlacedCoin() != 1)
+                    Destroy(instCoins[0]);
+                if (instCoins[1] != null && GetPlacedCoin() != 2)
+                    Destroy(instCoins[1]);
+                if (instCoins[2] != null && GetPlacedCoin() != 3)
+                    Destroy(instCoins[2]);
+                
+                Debug.Log("La monedica es: " + GetPlacedCoin());
                 break;
             }
             case GameState.STATE_PLAYING:
@@ -230,5 +256,32 @@ public class GameManager : MonoBehaviour
     {
         spawnSpeed = speed;
         animator.speed = spawnSpeed;
+    }
+
+    public void CoinPlaced()
+    {
+        grabCoinText.SetActive(false);
+        gameState = GameState.STATE_BEGINGAME;
+    }
+
+    public int GetPlacedCoin()
+    {
+        switch (coinPlacePoint.placedObject.gameObject.name)
+        {
+            case "GoldCoin(Clone)":
+            {
+                return 1;
+            }
+            case "SilverCoin(Clone)":
+            {
+                return 2;
+            }
+            case "CopperCoin(Clone)":
+            {
+                return 3;
+            }
+        }
+
+        return 0;
     }
 }
