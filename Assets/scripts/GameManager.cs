@@ -11,6 +11,13 @@ public enum GameState
     STATE_ENDGAME
 }
 
+public enum PreviewWeapon
+{
+    DEAGLE,
+    SVD,
+    SPAS
+}
+
 public class GameManager : MonoBehaviour
 {
     // Configuración de Prefabs
@@ -51,13 +58,19 @@ public class GameManager : MonoBehaviour
     public int enemiesPerWave = 5; // Enemigos por oleada
     public float spawnDelay = 0.5f; // Retraso entre spawns individuales en una oleada
 
-    [Header("Game State")] 
-    public GameState gameState;
-
     [Header("Objects")] 
     public PlacePoint coinPlacePoint;
     public GameObject grabCoinText;
     public GameObject[] coins;
+    
+    [Header("Select Weapon")]
+    public GameObject selectWeaponState;
+    public Transform previewWeaponPoint;
+    public GameObject[] previewWeapons;
+    public GameObject[] playerWeapons;
+    public Transform playerWeaponPoint;
+    public GameObject[] playerMagazines;
+    public Transform playerMagazinePoint;
 
     // Lista para guardar los objetos instanciados
     private List<GameObject> spawnedTargets = new List<GameObject>();
@@ -65,18 +78,21 @@ public class GameManager : MonoBehaviour
     // Control de puntos ocupados
     private HashSet<int> occupiedSpawnPoints = new HashSet<int>();
 
+    private GameState gameState = GameState.STATE_MENU;
     private ScoreController sc;
     private Animator animator;
     private GameObject[] instCoins = new GameObject[3];
-    private bool spawnCoins = true;
-    private bool deleteCoins = true;
+    private PreviewWeapon currentPreviewWeapon = PreviewWeapon.SPAS;
+    private GameObject instPreviewWeapon;
+    private bool needPreviewWeaponUpdate = true;
+    private GameObject instPlayerWeapon;
+    private GameObject instPlayerMagazine;
+    private bool startCoroutineGame = true;
 
     void Start()
     {
         sc = scoreController.GetComponent<ScoreController>();
         animator = shopKeeper.GetComponent<Animator>();
-
-        StartCoroutine(SpawnWaves());
     }
 
     void Update()
@@ -104,11 +120,25 @@ public class GameManager : MonoBehaviour
                 if (instCoins[2] != null && GetPlacedCoin() != 3)
                     Destroy(instCoins[2]);
                 
+                if (!selectWeaponState.activeSelf)
+                    selectWeaponState.SetActive(true);
+
+                UpdatePreviewWeapon();
+                
                 Debug.Log("La monedica es: " + GetPlacedCoin());
                 break;
             }
             case GameState.STATE_PLAYING:
             {
+                if (instPreviewWeapon != null)
+                    Destroy(instPreviewWeapon);
+
+                if (!instPlayerWeapon)
+                    instPlayerWeapon = Instantiate(playerWeapons[(int)currentPreviewWeapon], playerWeaponPoint.position, playerWeaponPoint.rotation);
+                if (!instPlayerMagazine)
+                    instPlayerMagazine = Instantiate(playerMagazines[(int)currentPreviewWeapon], playerMagazinePoint.position, playerMagazinePoint.rotation);
+
+                StartGame();
                 break;
             }
             case GameState.STATE_ENDGAME:
@@ -125,6 +155,15 @@ public class GameManager : MonoBehaviour
         {
             DestroyAll();
         }
+    }
+
+    private void StartGame()
+    {
+        if (!startCoroutineGame)
+            return;
+        
+        StartCoroutine(SpawnWaves());
+        startCoroutineGame = false;
     }
 
     // Corrutina para manejar oleadas
@@ -265,6 +304,12 @@ public class GameManager : MonoBehaviour
         gameState = GameState.STATE_BEGINGAME;
     }
 
+    public void WeaponSelected()
+    {
+        selectWeaponState.SetActive(false);
+        gameState = GameState.STATE_PLAYING;
+    }
+
     public int GetPlacedCoin()
     {
         switch (coinPlacePoint.placedObject.gameObject.name)
@@ -284,5 +329,71 @@ public class GameManager : MonoBehaviour
         }
 
         return 0;
+    }
+
+    private void UpdatePreviewWeapon()
+    {
+        if (!needPreviewWeaponUpdate)
+            return;
+        
+        if (!instPreviewWeapon)
+        {
+            instPreviewWeapon = Instantiate(previewWeapons[(int)currentPreviewWeapon], previewWeaponPoint.position, previewWeaponPoint.rotation);
+        }
+        else
+        {
+            Destroy(instPreviewWeapon);
+            instPreviewWeapon = Instantiate(previewWeapons[(int)currentPreviewWeapon], previewWeaponPoint.position, previewWeaponPoint.rotation);
+        }
+
+        needPreviewWeaponUpdate = false;
+    }
+
+    public void LeftChangeWeapon()
+    {
+        switch (currentPreviewWeapon)
+        {
+            case PreviewWeapon.DEAGLE:
+            {
+                currentPreviewWeapon = PreviewWeapon.SPAS;
+                break;
+            }
+            case PreviewWeapon.SVD:
+            {
+                currentPreviewWeapon = PreviewWeapon.DEAGLE;
+                break;
+            }
+            case PreviewWeapon.SPAS:
+            {
+                currentPreviewWeapon = PreviewWeapon.SVD;
+                break;
+            }
+        }
+
+        needPreviewWeaponUpdate = true;
+    }
+
+    public void RightChangeWeapon()
+    {
+        switch (currentPreviewWeapon)
+        {
+            case PreviewWeapon.DEAGLE:
+            {
+                currentPreviewWeapon = PreviewWeapon.SVD;
+                break;
+            }
+            case PreviewWeapon.SVD:
+            {
+                currentPreviewWeapon = PreviewWeapon.SPAS;
+                break;
+            }
+            case PreviewWeapon.SPAS:
+            {
+                currentPreviewWeapon = PreviewWeapon.DEAGLE;
+                break;
+            }
+        }
+
+        needPreviewWeaponUpdate = true;
     }
 }
