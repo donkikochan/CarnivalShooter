@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     // Controladores
     [Header("Controladores")]
     public GameObject scoreController;
+    public GameObject Timer;
 
     // Configuración de oleadas
     [Header("Configuración de Oleadas")]
