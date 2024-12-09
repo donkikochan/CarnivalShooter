@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43940017, g: 0.48773295, b: 0.5679734, a: 1}
+  m_IndirectSpecularColor: {r: 0.43940106, g: 0.48773432, b: 0.5679747, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -28401,6 +28401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ebdbf26bc5917341a3d1e5146398776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 900
   timeText: {fileID: 983460730}
 --- !u!1001 &827236544
 PrefabInstance:
@@ -30466,10 +30467,17 @@ MonoBehaviour:
   bandido: {fileID: 2989819742390944919, guid: e2a94e9ec5752e640bf355bda48863a6, type: 3}
   armero: {fileID: 5905002751280521748, guid: bd7a337d6a7b43242b06bf8043fca30d, type: 3}
   secuaz: {fileID: 1811834564692963987, guid: 475454aaf011650419a75d12d960aae6, type: 3}
+  crio: {fileID: 1275225803589463611, guid: fe81fb0cb6777d9448d83daec766d838, type: 3}
+  damisela: {fileID: 6168489718059140791, guid: 8c14d52b05c355e498bf4bbfd36efdaf, type: 3}
+  banquero: {fileID: 3750770906003945028, guid: ad41c96d7a887d9429d74c95f458c610, type: 3}
   shopKeeper: {fileID: 74320568}
   bandidoChance: 50
   armeroChance: 30
   secuazChance: 20
+  crioChance: 20
+  damiselaChance: 20
+  banqueroChance: 10
+  spawnSpeed: 1
   spawnPoints:
   - {fileID: 1750553451}
   - {fileID: 1610426823}

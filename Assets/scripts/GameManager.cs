@@ -17,13 +17,20 @@ public class GameManager : MonoBehaviour
     public GameObject bandido;
     public GameObject armero;
     public GameObject secuaz;
+    public GameObject crio;
+    public GameObject damisela;
+    public GameObject banquero;
     public GameObject shopKeeper;
 
     // Probabilidades de aparición
     [Header("Probabilidades de Aparición")]
-    [Range(0, 100)] public int bandidoChance = 50;
+    [Range(0, 100)] public int bandidoChance = 70;
     [Range(0, 100)] public int armeroChance = 30;
-    [Range(0, 100)] public int secuazChance = 20;
+    [Range(0, 100)] public int secuazChance = 50;
+    [Range(0, 100)] public int crioChance = 15;
+    [Range(0, 100)] public int damiselaChance = 10;
+    [Range(0, 100)] public int banqueroChance = 30;
+    [Range(1, 2)] public float spawnSpeed = 1;
 
     // Configuración de puntos de spawn
     [Header("Puntos de Spawn")]
@@ -141,12 +148,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Método para obtener un prefab basado en las probabilidades
+// Método para obtener un prefab basado en las probabilidades
     private GameObject GetRandomPrefab()
     {
-        int totalChance = bandidoChance + armeroChance + secuazChance;
+        // Suma todas las probabilidades
+        int totalChance = bandidoChance + armeroChance + secuazChance + crioChance + damiselaChance + banqueroChance;
         int randomValue = Random.Range(0, totalChance);
 
+        // Selección en función del rango de probabilidades
         if (randomValue < bandidoChance)
         {
             return bandido;
@@ -155,9 +164,21 @@ public class GameManager : MonoBehaviour
         {
             return armero;
         }
-        else
+        else if (randomValue < bandidoChance + armeroChance + secuazChance)
         {
             return secuaz;
+        }
+        else if (randomValue < bandidoChance + armeroChance + secuazChance + crioChance)
+        {
+            return crio;
+        }
+        else if (randomValue < bandidoChance + armeroChance + secuazChance + crioChance + damiselaChance)
+        {
+            return damisela;
+        }
+        else
+        {
+            return banquero;
         }
     }
 
@@ -203,5 +224,11 @@ public class GameManager : MonoBehaviour
         // Limpia la lista y los puntos ocupados
         spawnedTargets.Clear();
         occupiedSpawnPoints.Clear();
+    }
+
+    public void SetAnimatonSpeed(float speed)
+    {
+        spawnSpeed = speed;
+        animator.speed = spawnSpeed;
     }
 }
