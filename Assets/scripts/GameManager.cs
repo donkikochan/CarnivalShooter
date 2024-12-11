@@ -67,10 +67,10 @@ public class GameManager : MonoBehaviour
     public GameObject selectWeaponState;
     public Transform previewWeaponPoint;
     public GameObject[] previewWeapons;
-    public GameObject[] playerWeapons;
     public Transform playerWeaponPoint;
-    public GameObject[] playerMagazines;
+    public GameObject[] playerWeapons;
     public Transform playerMagazinePoint;
+    public GameObject[] playerMagazines;
 
     // Lista para guardar los objetos instanciados
     private List<GameObject> spawnedTargets = new List<GameObject>();
@@ -78,11 +78,11 @@ public class GameManager : MonoBehaviour
     // Control de puntos ocupados
     private HashSet<int> occupiedSpawnPoints = new HashSet<int>();
 
-    private GameState gameState = GameState.STATE_MENU;
+    private GameState gameState = GameState.STATE_PLAYING;
     private ScoreController sc;
     private Animator animator;
     private GameObject[] instCoins = new GameObject[3];
-    private PreviewWeapon currentPreviewWeapon = PreviewWeapon.SPAS;
+    private PreviewWeapon currentPreviewWeapon = PreviewWeapon.DEAGLE;
     private GameObject instPreviewWeapon;
     private bool needPreviewWeaponUpdate = true;
     private GameObject instPlayerWeapon;

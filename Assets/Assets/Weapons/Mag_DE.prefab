@@ -215,9 +215,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '999
-
-'
+  m_text: 7
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -344,8 +342,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.030621529, y: 0.13013291, z: 0.071614265}
-  m_Center: {x: -0.00043463707, y: 0.16994298, z: -0.09823656}
+  m_Size: {x: 0.05809641, y: 0.1400249, z: 0.032128334}
+  m_Center: {x: 0.004243374, y: -0.0052474737, z: -0.00056791306}
 --- !u!54 &1260736176773830457
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -452,7 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdeab21deb0d4b4093a6d63537c25cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 999
+  currentAmmo: 7
   ammoText: {fileID: 2898724346991490230}
 --- !u!1 &7572648192309842999
 GameObject:
