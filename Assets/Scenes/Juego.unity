@@ -28666,6 +28666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ebdbf26bc5917341a3d1e5146398776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beginTimer: 0
   time: 900
   timeText: {fileID: 983460730}
 --- !u!1001 &827236544
@@ -30870,7 +30871,7 @@ MonoBehaviour:
   - {fileID: 975970599}
   - {fileID: 703365241}
   scoreController: {fileID: 1015673888}
-  Timer: {fileID: 0}
+  timeController: {fileID: 825255811}
   waveInterval: 8
   enemiesPerWave: 5
   spawnDelay: 0.5
@@ -30893,9 +30894,9 @@ MonoBehaviour:
   - {fileID: 2876417402160665156, guid: e19564651dd25bb449e84482cc386a59, type: 3}
   playerMagazinePoint: {fileID: 1438363541}
   playerMagazines:
-  - {fileID: 7174413105460944048, guid: d35700b72b64eca4b9e5dc18b8abc9af, type: 3}
-  - {fileID: 8200486245420935711, guid: b53f628c2ba6645419ce3b43ea911d2a, type: 3}
-  - {fileID: 8787393118052315146, guid: 060006863d45ba6418b121606201d488, type: 3}
+  - {fileID: 7794062478472159600, guid: b81d505153d3e554b970471e18451936, type: 3}
+  - {fileID: 3446768970419527237, guid: 0c135e857109f644eaf4984f0d0b4966, type: 3}
+  - {fileID: 8964064694252522753, guid: 8672d542953b08749b3b290691bc6253, type: 3}
   countDownText: {fileID: 1476838342}
 --- !u!4 &973421268
 Transform:

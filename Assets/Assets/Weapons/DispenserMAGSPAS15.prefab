@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8964064694252522753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5277212668070290188}
+  - component: {fileID: 9089118115904827589}
+  m_Layer: 0
+  m_Name: DispenserMAGSPAS15
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5277212668070290188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964064694252522753}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -309.6228, y: 69.176, z: 593.01086}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5574527555101286407}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9089118115904827589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964064694252522753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e06fa0b8c2a3b047ab22fa2c4dcbaa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreMe: 0
+  showeSettings: 1
+  dispenseObject: {fileID: 3342490024146751450}
+  maxCopies: 3
+  resetDelay: 0
+  disableBody: 0
+  isKinematic: 1
+  destroyOnReset: 1
+  maxDistance: 1
+  OnGrabDispenseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDispenseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1001 &6778814004244695592
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5277212668070290188}
+    m_Modifications:
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.5000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5000044
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.49999702
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49999714
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -270
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164588177094245035, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: currentAmmo
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787393118052315146, guid: 060006863d45ba6418b121606201d488, type: 3}
+      propertyPath: m_Name
+      value: MAG_SPAS15_VR
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 060006863d45ba6418b121606201d488, type: 3}
+--- !u!114 &3342490024146751450 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8102476679256933874, guid: 060006863d45ba6418b121606201d488, type: 3}
+  m_PrefabInstance: {fileID: 6778814004244695592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 822bc9090447b9c40833509c4a32e597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &5574527555101286407 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1391502528730016303, guid: 060006863d45ba6418b121606201d488, type: 3}
+  m_PrefabInstance: {fileID: 6778814004244695592}
+  m_PrefabAsset: {fileID: 0}
