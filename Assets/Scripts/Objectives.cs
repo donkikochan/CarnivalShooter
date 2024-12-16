@@ -7,9 +7,12 @@ public class Objectives : MonoBehaviour
 {
     public event Action OnDestroyed;
     public float duration = 5.0f; // Tiempo antes de que el objeto se destruya automáticamente
-    public int points; // Puntos que otorga este objetivo al destruirse
+    public int points = 50; // Puntos que otorga este objetivo al destruirse
+    public int timeThatGives = 10;
     public bool rechargesAmmo = false;
+    public bool givesTime = false;
     private ScoreController scoreController;
+    private TimeController timeController;
     private Animator animator;
     private bool gotShot = false;
 
@@ -22,14 +25,13 @@ public class Objectives : MonoBehaviour
     {
         // Encuentra el ScoreController en la escena
         scoreController = FindObjectOfType<ScoreController>();
+        timeController = FindObjectOfType<TimeController>();
         animator = GetComponent<Animator>();
 
         if (scoreController == null)
         {
             Debug.LogError("No se encontró un ScoreController en la escena.");
         }
-
-        SetPoints(50);
 
         // Inicia la destrucción automática después de 5 segundos
         Invoke(nameof(DestroyAutomatically), duration);
@@ -57,6 +59,11 @@ public class Objectives : MonoBehaviour
             
             if (spas)
                 spas.GetComponent<AutoGun>().SetAmmo(17);
+        }
+
+        if (givesTime)
+        {
+            timeController.AddTime(timeThatGives);
         }
 
         // Activar la animación de cierre
@@ -116,10 +123,5 @@ public class Objectives : MonoBehaviour
                 DestroyAfterAnimation(); // Si no hay animación, destrúyelo directamente
             }
         }
-    }
-
-    private void SetPoints(int points)
-    {
-        this.points = points;
     }
 }

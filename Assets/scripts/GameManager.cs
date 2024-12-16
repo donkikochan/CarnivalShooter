@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
     private GameObject instPlayerMagazine;
     private bool startCoroutineGame = true;
     private float startGameCountDown = 5f;
+    private int banqueroTime = 10;
 
     void Start()
     {
@@ -217,6 +218,8 @@ public class GameManager : MonoBehaviour
 
                 // Instancia el prefab
                 GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+                newObject.GetComponent<Animator>().speed = spawnSpeed;
+                newObject.GetComponent<Objectives>().timeThatGives = banqueroTime;
                 spawnedTargets.Add(newObject);
 
                 // Marca el punto como ocupado
@@ -308,12 +311,6 @@ public class GameManager : MonoBehaviour
         // Limpia la lista y los puntos ocupados
         spawnedTargets.Clear();
         occupiedSpawnPoints.Clear();
-    }
-
-    public void SetAnimatonSpeed(float speed)
-    {
-        spawnSpeed = speed;
-        animator.speed = spawnSpeed;
     }
 
     public void CoinPlaced()
@@ -469,15 +466,62 @@ public class GameManager : MonoBehaviour
     }
     
     #region GoldCoin (Fácil)
-    private void SetEasyGoldPhase() { bandidoChance = 50; armeroChance = 20; secuazChance = 40; crioChance = 10; damiselaChance = 10; banqueroChance = 20; spawnSpeed = 0.8f; enemiesPerWave = Random.Range(4, 8); waveInterval = Random.Range(5f, 7f);}
+
+    private void SetEasyGoldPhase()
+    {
+        bandidoChance = 50; 
+        armeroChance = 20; 
+        secuazChance = 40; 
+        crioChance = 10; 
+        damiselaChance = 10; 
+        banqueroChance = 20; spawnSpeed = 0.8f; enemiesPerWave = Random.Range(4, 8); waveInterval = Random.Range(5f, 7f);
+    }
     private void SetModerateGoldPhase() { bandidoChance = 60; armeroChance = 30; secuazChance = 50; crioChance = 15; damiselaChance = 15; banqueroChance = 30; spawnSpeed = 1.0f; enemiesPerWave = Random.Range(6, 12); waveInterval = Random.Range(4f, 6f);}
     private void SetHardGoldPhase() { bandidoChance = 70; armeroChance = 40; secuazChance = 60; crioChance = 20; damiselaChance = 20; banqueroChance = 40; spawnSpeed = 1.2f; enemiesPerWave = Random.Range(8, 14); waveInterval = Random.Range(3f, 5f);}
     #endregion
 
     #region SilverCoin (Media)
-    private void SetEasySilverPhase() { bandidoChance = 40; armeroChance = 30; secuazChance = 50; crioChance = 10; damiselaChance = 15; banqueroChance = 25; spawnSpeed = 1.0f; enemiesPerWave = Random.Range(5, 10); waveInterval = Random.Range(4f, 6f);}
-    private void SetModerateSilverPhase() { bandidoChance = 60; armeroChance = 40; secuazChance = 60; crioChance = 20; damiselaChance = 20; banqueroChance = 30; spawnSpeed = 1.2f; enemiesPerWave = Random.Range(10, 14); waveInterval = Random.Range(3f, 5f);}
-    private void SetHardSilverPhase() { bandidoChance = 70; armeroChance = 50; secuazChance = 70; crioChance = 30; damiselaChance = 25; banqueroChance = 40; spawnSpeed = 1.5f; enemiesPerWave = Random.Range(12, 16); waveInterval = Random.Range(2f, 4f);}
+    private void SetEasySilverPhase() 
+    { 
+        bandidoChance = 40; 
+        armeroChance = 30; 
+        secuazChance = 50; 
+        crioChance = 10; 
+        damiselaChance = 15; 
+        banqueroChance = 25; 
+        spawnSpeed = 1.0f; 
+        enemiesPerWave = Random.Range(5, 10); 
+        waveInterval = Random.Range(4f, 6f); 
+        banqueroTime = 10;
+    }
+
+    private void SetModerateSilverPhase()
+    {
+        bandidoChance = 60; 
+        armeroChance = 40; 
+        secuazChance = 60; 
+        crioChance = 20; 
+        damiselaChance = 20; 
+        banqueroChance = 30; 
+        spawnSpeed = 1.2f; 
+        enemiesPerWave = Random.Range(10, 14); 
+        waveInterval = Random.Range(3f, 5f);
+        banqueroTime = 10;
+    }
+
+    private void SetHardSilverPhase()
+    {
+        bandidoChance = 70; 
+        armeroChance = 50; 
+        secuazChance = 70; 
+        crioChance = 30; 
+        damiselaChance = 25; 
+        banqueroChance = 40; 
+        spawnSpeed = 1.5f; 
+        enemiesPerWave = Random.Range(12, 16); 
+        waveInterval = Random.Range(2f, 4f);
+        banqueroTime = 10;
+    }
     #endregion
 
     #region CopperCoin (Difícil)
