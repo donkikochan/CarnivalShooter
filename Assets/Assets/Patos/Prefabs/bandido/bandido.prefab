@@ -134,6 +134,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8126bd2eea9fa5b4588a0fc0b03ae1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 5
+  points: 50
+  timeThatGives: 10
+  rechargesAmmo: 0
+  givesTime: 0
+  givesNegativePoints: 0
+  givesNegativeTime: 0
 --- !u!65 &6420621264794109073
 BoxCollider:
   m_ObjectHideFlags: 0

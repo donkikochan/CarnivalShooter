@@ -82,6 +82,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 5
+  points: 25
+  timeThatGives: 10
+  rechargesAmmo: 0
+  givesTime: 0
+  givesNegativePoints: 0
+  givesNegativeTime: 0
 --- !u!65 &5379768830471868947
 BoxCollider:
   m_ObjectHideFlags: 0
