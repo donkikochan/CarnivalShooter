@@ -1,4 +1,5 @@
 using System;
+using Autohand;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class Objectives : MonoBehaviour
     public event Action OnDestroyed;
     public float duration = 5.0f; // Tiempo antes de que el objeto se destruya automáticamente
     public int points; // Puntos que otorga este objetivo al destruirse
+    public bool rechargesAmmo = false;
     private ScoreController scoreController;
     private Animator animator;
     private bool gotShot = false;
@@ -40,6 +42,22 @@ public class Objectives : MonoBehaviour
 
         // Sumar puntos al ScoreController
         scoreController.AddScore(points);
+
+        if (rechargesAmmo)
+        {
+            GameObject de = GameObject.FindGameObjectWithTag("WeaponDE");
+            GameObject svd = GameObject.FindGameObjectWithTag("WeaponSVD");
+            GameObject spas = GameObject.FindGameObjectWithTag("WeaponSPAS");
+            
+            if (de)
+                de.GetComponent<AutoGun>().SetAmmo(8);
+            
+            if (svd)
+                svd.GetComponent<AutoGun>().SetAmmo(11);
+            
+            if (spas)
+                spas.GetComponent<AutoGun>().SetAmmo(17);
+        }
 
         // Activar la animación de cierre
         animator.SetTrigger("close");
