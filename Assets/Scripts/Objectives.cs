@@ -11,6 +11,8 @@ public class Objectives : MonoBehaviour
     public int timeThatGives = 10;
     public bool rechargesAmmo = false;
     public bool givesTime = false;
+    public bool givesNegativePoints = false;
+    public bool givesNegativeTime = false;
     private ScoreController scoreController;
     private TimeController timeController;
     private Animator animator;
@@ -42,8 +44,15 @@ public class Objectives : MonoBehaviour
         if (gotShot)
             return;
 
-        // Sumar puntos al ScoreController
-        scoreController.AddScore(points);
+        if (givesNegativePoints)
+        {
+            scoreController.RemoveScore(points);
+        }
+        else
+        {
+            // Sumar puntos al ScoreController
+            scoreController.AddScore(points);
+        }
 
         if (rechargesAmmo)
         {
@@ -63,7 +72,14 @@ public class Objectives : MonoBehaviour
 
         if (givesTime)
         {
-            timeController.AddTime(timeThatGives);
+            if (givesNegativeTime)
+            {
+                timeController.RemoveTime(timeThatGives);
+            }
+            else
+            {
+                timeController.AddTime(timeThatGives);
+            }
         }
 
         // Activar la animación de cierre
