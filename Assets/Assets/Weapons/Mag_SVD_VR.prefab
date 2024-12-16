@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdeab21deb0d4b4093a6d63537c25cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 10
+  currentAmmo: 999
   ammoText: {fileID: 3526214511078077900}
 --- !u!65 &847801648058279455
 BoxCollider:

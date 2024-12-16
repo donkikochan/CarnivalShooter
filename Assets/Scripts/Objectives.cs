@@ -6,7 +6,7 @@ public class Objectives : MonoBehaviour
 {
     public event Action OnDestroyed;
     public float duration = 5.0f; // Tiempo antes de que el objeto se destruya automáticamente
-    private int points; // Puntos que otorga este objetivo al destruirse
+    public int points; // Puntos que otorga este objetivo al destruirse
     private ScoreController scoreController;
     private Animator animator;
     private bool gotShot = false;

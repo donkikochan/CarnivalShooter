@@ -5,6 +5,7 @@ using TMPro;
 
 public class TimeController : MonoBehaviour
 {
+    public bool beginTimer = false;
     public int time = 900;
     private float currentTime;
     public TextMeshPro timeText;
@@ -18,6 +19,9 @@ public class TimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!beginTimer)
+            return;
+        
         if (HasEnded())
             return;
         

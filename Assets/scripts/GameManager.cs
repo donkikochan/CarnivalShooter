@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Autohand;
+using TMPro;
 using UnityEngine;
 
 public enum GameState
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
     // Controladores
     [Header("Controladores")]
     public GameObject scoreController;
-    public GameObject Timer;
+    public GameObject timeController;
 
     // Configuración de oleadas
     [Header("Configuración de Oleadas")]
@@ -72,14 +73,18 @@ public class GameManager : MonoBehaviour
     public Transform playerMagazinePoint;
     public GameObject[] playerMagazines;
 
+    [Header("Start Game")] 
+    public GameObject countDownText;
+
     // Lista para guardar los objetos instanciados
     private List<GameObject> spawnedTargets = new List<GameObject>();
 
     // Control de puntos ocupados
     private HashSet<int> occupiedSpawnPoints = new HashSet<int>();
 
-    private GameState gameState = GameState.STATE_PLAYING;
+    private GameState gameState = GameState.STATE_MENU;
     private ScoreController sc;
+    private TimeController tc;
     private Animator animator;
     private GameObject[] instCoins = new GameObject[3];
     private PreviewWeapon currentPreviewWeapon = PreviewWeapon.DEAGLE;
@@ -88,10 +93,12 @@ public class GameManager : MonoBehaviour
     private GameObject instPlayerWeapon;
     private GameObject instPlayerMagazine;
     private bool startCoroutineGame = true;
+    private float startGameCountDown = 5f;
 
     void Start()
     {
         sc = scoreController.GetComponent<ScoreController>();
+        tc = timeController.GetComponent<TimeController>();
         animator = shopKeeper.GetComponent<Animator>();
     }
 
@@ -138,7 +145,16 @@ public class GameManager : MonoBehaviour
                 if (!instPlayerMagazine)
                     instPlayerMagazine = Instantiate(playerMagazines[(int)currentPreviewWeapon], playerMagazinePoint.position, playerMagazinePoint.rotation);
 
-                StartGame();
+                if (startCoroutineGame)
+                {
+                    countDownText.SetActive(true);
+                    countDownText.GetComponent<TextMeshPro>().text = "Game Starts in: \n" + Mathf.Max(0, Mathf.Ceil(startGameCountDown)) + " seconds";
+                    startGameCountDown -= Time.deltaTime;
+                    Invoke("StartGame", 5.0f);
+                }
+                
+                AdjustSpawnProbabilities();
+                
                 break;
             }
             case GameState.STATE_ENDGAME:
@@ -146,7 +162,7 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        /*if (Input.GetKeyDown(KeyCode.A))
         {
             animator.CrossFade("Give", 0f);
         }
@@ -154,7 +170,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             DestroyAll();
-        }
+        }*/
     }
 
     private void StartGame()
@@ -163,7 +179,9 @@ public class GameManager : MonoBehaviour
             return;
         
         StartCoroutine(SpawnWaves());
+        countDownText.SetActive(false);
         startCoroutineGame = false;
+        tc.beginTimer = true;
     }
 
     // Corrutina para manejar oleadas
@@ -338,12 +356,12 @@ public class GameManager : MonoBehaviour
         
         if (!instPreviewWeapon)
         {
-            instPreviewWeapon = Instantiate(previewWeapons[(int)currentPreviewWeapon], previewWeaponPoint.position, previewWeaponPoint.rotation);
+            instPreviewWeapon = Instantiate(previewWeapons[(int)currentPreviewWeapon], previewWeaponPoint.position, previewWeapons[(int)currentPreviewWeapon].transform.rotation);
         }
         else
         {
             Destroy(instPreviewWeapon);
-            instPreviewWeapon = Instantiate(previewWeapons[(int)currentPreviewWeapon], previewWeaponPoint.position, previewWeaponPoint.rotation);
+            instPreviewWeapon = Instantiate(previewWeapons[(int)currentPreviewWeapon], previewWeaponPoint.position, previewWeapons[(int)currentPreviewWeapon].transform.rotation);
         }
 
         needPreviewWeaponUpdate = false;
@@ -396,4 +414,75 @@ public class GameManager : MonoBehaviour
 
         needPreviewWeaponUpdate = true;
     }
+    
+    private void AdjustSpawnProbabilities()
+    {
+        int minutesRemaining = Mathf.FloorToInt(tc.GetTime() / 60); // Obtenemos los minutos restantes
+
+        switch (GetPlacedCoin())
+        {
+            case 1: // GoldCoin (Fácil)
+                if (minutesRemaining <= 15 && minutesRemaining > 10)
+                {
+                    SetEasyGoldPhase();
+                }
+                else if (minutesRemaining <= 10 && minutesRemaining > 5)
+                {
+                    SetModerateGoldPhase();
+                }
+                else if (minutesRemaining <= 5)
+                {
+                    SetHardGoldPhase();
+                }
+                break;
+
+            case 2: // SilverCoin (Media)
+                if (minutesRemaining <= 15 && minutesRemaining > 10)
+                {
+                    SetEasySilverPhase();
+                }
+                else if (minutesRemaining <= 10 && minutesRemaining > 5)
+                {
+                    SetModerateSilverPhase();
+                }
+                else if (minutesRemaining <= 5)
+                {
+                    SetHardSilverPhase();
+                }
+                break;
+
+            case 3: // CopperCoin (Difícil)
+                if (minutesRemaining <= 15 && minutesRemaining > 10)
+                {
+                    SetEasyCopperPhase();
+                }
+                else if (minutesRemaining <= 10 && minutesRemaining > 5)
+                {
+                    SetModerateCopperPhase();
+                }
+                else if (minutesRemaining <= 5)
+                {
+                    SetHardCopperPhase();
+                }
+                break;
+        }
+    }
+    
+    #region GoldCoin (Fácil)
+    private void SetEasyGoldPhase() { bandidoChance = 50; armeroChance = 20; secuazChance = 40; crioChance = 10; damiselaChance = 10; banqueroChance = 20; spawnSpeed = 0.8f; enemiesPerWave = 4; waveInterval = 12f; }
+    private void SetModerateGoldPhase() { bandidoChance = 60; armeroChance = 30; secuazChance = 50; crioChance = 15; damiselaChance = 15; banqueroChance = 30; spawnSpeed = 1.0f; enemiesPerWave = 6; waveInterval = 10f; }
+    private void SetHardGoldPhase() { bandidoChance = 70; armeroChance = 40; secuazChance = 60; crioChance = 20; damiselaChance = 20; banqueroChance = 40; spawnSpeed = 1.2f; enemiesPerWave = 8; waveInterval = 8f; }
+    #endregion
+
+    #region SilverCoin (Media)
+    private void SetEasySilverPhase() { bandidoChance = 40; armeroChance = 30; secuazChance = 50; crioChance = 10; damiselaChance = 15; banqueroChance = 25; spawnSpeed = 1.0f; enemiesPerWave = 5; waveInterval = 10f; }
+    private void SetModerateSilverPhase() { bandidoChance = 60; armeroChance = 40; secuazChance = 60; crioChance = 20; damiselaChance = 20; banqueroChance = 30; spawnSpeed = 1.2f; enemiesPerWave = 7; waveInterval = 8f; }
+    private void SetHardSilverPhase() { bandidoChance = 70; armeroChance = 50; secuazChance = 70; crioChance = 30; damiselaChance = 25; banqueroChance = 40; spawnSpeed = 1.5f; enemiesPerWave = 10; waveInterval = 6f; }
+    #endregion
+
+    #region CopperCoin (Difícil)
+    private void SetEasyCopperPhase() { bandidoChance = 30; armeroChance = 40; secuazChance = 60; crioChance = 10; damiselaChance = 15; banqueroChance = 20; spawnSpeed = 1.0f; enemiesPerWave = 6; waveInterval = 12f; }
+    private void SetModerateCopperPhase() { bandidoChance = 50; armeroChance = 60; secuazChance = 70; crioChance = 25; damiselaChance = 25; banqueroChance = 35; spawnSpeed = 1.2f; enemiesPerWave = 8; waveInterval = 10f; }
+    private void SetHardCopperPhase() { bandidoChance = 80; armeroChance = 80; secuazChance = 90; crioChance = 40; damiselaChance = 35; banqueroChance = 50; spawnSpeed = 1.5f; enemiesPerWave = 12; waveInterval = 8f; }
+    #endregion
 }
