@@ -94,7 +94,8 @@ public class GameManager : MonoBehaviour
     private GameObject instPlayerMagazine;
     private bool startCoroutineGame = true;
     private float startGameCountDown = 5f;
-    private int banqueroTime = 10;
+    private int givesTimePositive = 10;
+    private int givesTimeNegative = 10;
 
     void Start()
     {
@@ -219,7 +220,11 @@ public class GameManager : MonoBehaviour
                 // Instancia el prefab
                 GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
                 newObject.GetComponent<Animator>().speed = spawnSpeed;
-                newObject.GetComponent<Objectives>().timeThatGives = banqueroTime;
+                Objectives objObjective = newObject.GetComponent<Objectives>();
+                if (objObjective.givesNegativeTime)
+                    objObjective.timeThatGives = givesTimeNegative;
+                else
+                    objObjective.timeThatGives = givesTimePositive;
                 spawnedTargets.Add(newObject);
 
                 // Marca el punto como ocupado
@@ -478,8 +483,8 @@ public class GameManager : MonoBehaviour
         spawnSpeed = 0.8f; 
         enemiesPerWave = Random.Range(4, 8); 
         waveInterval = Random.Range(5f, 7f);
-        banqueroTime = 10;
-
+        givesTimePositive = 10;
+        givesTimePositive = 10;
     }
 
     private void SetModerateGoldPhase()
@@ -493,8 +498,8 @@ public class GameManager : MonoBehaviour
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(6, 12); 
         waveInterval = Random.Range(4f, 6f);
-        banqueroTime = 10;
-
+        givesTimePositive = 10;
+        givesTimeNegative = 10;
     }
 
     private void SetHardGoldPhase()
@@ -508,8 +513,8 @@ public class GameManager : MonoBehaviour
         spawnSpeed = 1.2f; 
         enemiesPerWave = Random.Range(8, 14); 
         waveInterval = Random.Range(3f, 5f);
-        banqueroTime = 10;
-
+        givesTimePositive = 10;
+        givesTimeNegative = 10;
     }
     #endregion
 
@@ -524,8 +529,9 @@ public class GameManager : MonoBehaviour
         banqueroChance = 25; 
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(5, 10); 
-        waveInterval = Random.Range(4f, 6f); 
-        banqueroTime = 7;
+        waveInterval = Random.Range(4f, 6f);
+        givesTimePositive = 7;
+        givesTimeNegative = 7;
     }
 
     private void SetModerateSilverPhase()
@@ -539,7 +545,8 @@ public class GameManager : MonoBehaviour
         spawnSpeed = 1.2f; 
         enemiesPerWave = Random.Range(10, 14); 
         waveInterval = Random.Range(3f, 5f);
-        banqueroTime = 7;
+        givesTimePositive = 7;
+        givesTimeNegative = 7;
     }
 
     private void SetHardSilverPhase()
@@ -553,7 +560,8 @@ public class GameManager : MonoBehaviour
         spawnSpeed = 1.5f; 
         enemiesPerWave = Random.Range(12, 16); 
         waveInterval = Random.Range(2f, 4f);
-        banqueroTime = 7;
+        givesTimePositive = 7;
+        givesTimeNegative = 7;
     }
     #endregion
 
@@ -570,8 +578,8 @@ public class GameManager : MonoBehaviour
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(6, 12); 
         waveInterval = Random.Range(3f, 5f);
-        banqueroTime = 4;
-
+        givesTimePositive = 4;
+        givesTimeNegative = 4;
     }
 
     private void SetModerateCopperPhase()
@@ -585,8 +593,8 @@ public class GameManager : MonoBehaviour
         spawnSpeed = 1.2f; 
         enemiesPerWave = Random.Range(12, 16); 
         waveInterval = Random.Range(2f, 4f);
-        banqueroTime = 4;
-
+        givesTimePositive = 4;
+        givesTimeNegative = 4;
     }
 
     private void SetHardCopperPhase()
@@ -600,8 +608,8 @@ public class GameManager : MonoBehaviour
         spawnSpeed = 1.5f; 
         enemiesPerWave = Random.Range(16, 18); 
         waveInterval = Random.Range(1f, 3f);
-        banqueroTime = 4;
-
+        givesTimePositive = 4;
+        givesTimeNegative = 4;
     }
     #endregion
 }
