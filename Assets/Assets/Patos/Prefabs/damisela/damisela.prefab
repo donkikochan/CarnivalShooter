@@ -168,9 +168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 5
   points: 25
-  timeThatGives: 15
+  timeThatGives: 20
   rechargesAmmo: 0
-  givesTime: 0
+  givesTime: 1
   givesNegativePoints: 1
   givesNegativeTime: 1
 --- !u!65 &6026661909380590379

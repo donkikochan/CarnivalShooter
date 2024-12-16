@@ -86,7 +86,7 @@ MonoBehaviour:
   points: 50
   timeThatGives: 10
   rechargesAmmo: 0
-  givesTime: 0
+  givesTime: 1
   givesNegativePoints: 1
   givesNegativeTime: 1
 --- !u!65 &5571442038169552069
