@@ -43957,7 +43957,7 @@ MonoBehaviour:
   startPlaced: {fileID: 0}
   placedOffset: {fileID: 1564165915}
   shapeType: 0
-  placeRadius: 0.4
+  placeRadius: 0.5
   placeSize: {x: 0.1, y: 0.1, z: 0.1}
   shapeOffset: {x: 0, y: 0, z: 0}
   grabbablePlacePoint: 1
@@ -43968,9 +43968,9 @@ MonoBehaviour:
   matchRotation: 1
   resizeOnPlace: 0
   resizeOffset: -0.02
-  disableRigidbodyOnPlace: 0
-  disableGrabOnPlace: 0
-  disablePlacePointOnPlace: 0
+  disableRigidbodyOnPlace: 1
+  disableGrabOnPlace: 1
+  disablePlacePointOnPlace: 1
   destroyObjectOnPlace: 0
   makePlacedKinematic: 1
   placedJointLink: {fileID: 0}

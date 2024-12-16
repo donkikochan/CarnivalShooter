@@ -180,6 +180,11 @@ namespace Autohand {
             return magazinePoint == null ? 1 : ammo;
         }
 
+        public void SetAmmo(int ammo)
+        {
+            if (loadedAmmo != null)
+                loadedAmmo.currentAmmo = ammo;
+        }
 
         void OnMagPlace(PlacePoint point, Grabbable mag) {
             if(mag.TryGetComponent<AutoAmmo>(out var ammo)) {

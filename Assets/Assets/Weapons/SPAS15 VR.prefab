@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 4059158772864172796}
   m_Layer: 0
   m_Name: SPAS15 VR
-  m_TagString: Weapon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 709323373663144789}
   m_Layer: 0
   m_Name: Core
-  m_TagString: Untagged
+  m_TagString: WeaponSPAS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

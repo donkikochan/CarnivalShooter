@@ -1530,7 +1530,7 @@ GameObject:
   - component: {fileID: 815658897673779829}
   m_Layer: 0
   m_Name: Core
-  m_TagString: Untagged
+  m_TagString: WeaponDE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2516,7 +2516,7 @@ GameObject:
   - component: {fileID: 7419195660104229497}
   m_Layer: 0
   m_Name: Deagle VR
-  m_TagString: Weapon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
