@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Objects")] 
     public PlacePoint coinPlacePoint;
-    public GameObject grabCoinText;
     public GameObject[] coins;
     
     [Header("Select Weapon")]
@@ -74,7 +73,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] playerMagazines;
 
     [Header("Start Game")] 
-    public GameObject countDownText;
+    public GameObject cartel;
+    private bool isAnimating;
 
     // Lista para guardar los objetos instanciados
     private List<GameObject> spawnedTargets = new List<GameObject>();
@@ -83,9 +83,7 @@ public class GameManager : MonoBehaviour
     private HashSet<int> occupiedSpawnPoints = new HashSet<int>();
 
     private GameState gameState = GameState.STATE_MENU;
-    private ScoreController sc;
     private TimeController tc;
-    private Animator animator;
     private GameObject[] instCoins = new GameObject[3];
     private PreviewWeapon currentPreviewWeapon = PreviewWeapon.DEAGLE;
     private GameObject instPreviewWeapon;
@@ -99,9 +97,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        sc = scoreController.GetComponent<ScoreController>();
         tc = timeController.GetComponent<TimeController>();
-        animator = shopKeeper.GetComponent<Animator>();
     }
 
     void Update()
@@ -117,6 +113,8 @@ public class GameManager : MonoBehaviour
                     instCoins[1] = Instantiate(coins[1], coinSpawnPoints[1].position, coinSpawnPoints[1].rotation);
                 if (!instCoins[2])
                     instCoins[2] = Instantiate(coins[2], coinSpawnPoints[2].position, coinSpawnPoints[2].rotation);
+
+                UpdateCartel("Grab a coin:\nGold = Easy mode\nSilver = Medium mode\nCopper = Hard mode");
                 
                 break;
             }
@@ -131,6 +129,8 @@ public class GameManager : MonoBehaviour
                 
                 if (!selectWeaponState.activeSelf)
                     selectWeaponState.SetActive(true);
+                
+                UpdateCartel("Use the Lever to change Weapon\nPress the Red Button to chose it");
 
                 UpdatePreviewWeapon();
                 
@@ -146,11 +146,10 @@ public class GameManager : MonoBehaviour
                     instPlayerWeapon = Instantiate(playerWeapons[(int)currentPreviewWeapon], playerWeaponPoint.position, playerWeaponPoint.rotation);
                 if (!instPlayerMagazine)
                     instPlayerMagazine = Instantiate(playerMagazines[(int)currentPreviewWeapon], playerMagazinePoint.position, playerMagazinePoint.rotation);
-
+                
                 if (startCoroutineGame)
                 {
-                    countDownText.SetActive(true);
-                    countDownText.GetComponent<TextMeshPro>().text = "Game Starts in: \n" + Mathf.Max(0, Mathf.Ceil(startGameCountDown)) + " seconds";
+                    ChangeCartelText("Game Starts in: \n" + Mathf.Max(0, Mathf.Ceil(startGameCountDown)) + " seconds");
                     startGameCountDown -= Time.deltaTime;
                     Invoke("StartGame", 5.0f);
                 }
@@ -181,7 +180,7 @@ public class GameManager : MonoBehaviour
             return;
         
         StartCoroutine(SpawnWaves());
-        countDownText.SetActive(false);
+        SetCartelState(false);
         startCoroutineGame = false;
         tc.beginTimer = true;
     }
@@ -240,7 +239,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-// Método para obtener un prefab basado en las probabilidades
+    // Método para obtener un prefab basado en las probabilidades
     private GameObject GetRandomPrefab()
     {
         // Suma todas las probabilidades
@@ -320,7 +319,6 @@ public class GameManager : MonoBehaviour
 
     public void CoinPlaced()
     {
-        grabCoinText.SetActive(false);
         gameState = GameState.STATE_BEGINGAME;
     }
 
@@ -468,6 +466,62 @@ public class GameManager : MonoBehaviour
                 }
                 break;
         }
+    }
+    
+    private void ChangeCartelText(string newText)
+    {
+        TextMeshPro cartelText = cartel.GetComponentInChildren<TextMeshPro>();
+
+        if (!cartelText)
+            return;
+
+        
+        if (cartelText.text != newText)
+        {
+            cartelText.text = newText;
+        }
+    }
+
+    private void SetCartelState(bool state)
+    {
+        Animator cartelAnimator = cartel.GetComponent<Animator>();
+        
+        if (state)
+            cartelAnimator.SetTrigger("Open");
+        else
+            cartelAnimator.SetTrigger("Close");
+    }
+
+    private IEnumerator ChangeCartel(string newText)
+    {
+        TextMeshPro cartelText = cartel.GetComponentInChildren<TextMeshPro>();
+        Animator cartelAnimator = cartel.GetComponent<Animator>();
+        
+        if (isAnimating)
+            yield break;
+
+        isAnimating = true;
+
+        if (!cartelText || !cartelAnimator || cartelText.text == newText)
+        {
+            isAnimating = false;
+            yield break;
+        }
+        
+        cartelAnimator.SetTrigger("Close");
+
+        yield return new WaitForSeconds(cartelAnimator.GetCurrentAnimatorStateInfo(0).length);
+        
+        cartelText.text = newText;
+        
+        cartelAnimator.SetTrigger("Open");
+
+        isAnimating = false;
+    }
+    
+    public void UpdateCartel(string text)
+    {
+        StartCoroutine(ChangeCartel(text));
     }
     
     #region GoldCoin (Fácil)
