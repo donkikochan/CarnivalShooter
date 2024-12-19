@@ -13,6 +13,9 @@ public class Objectives : MonoBehaviour
     public bool givesTime = false;
     public bool givesNegativePoints = false;
     public bool givesNegativeTime = false;
+    public GameObject scoreMarkerPrefab;
+    public float markerHeightOffset = 2f;
+    
     private ScoreController scoreController;
     private TimeController timeController;
     private Animator animator;
@@ -81,6 +84,23 @@ public class Objectives : MonoBehaviour
                 timeController.AddTime(timeThatGives);
             }
         }
+
+        // Instanciar marcador de daño
+        GameObject marker = Instantiate(scoreMarkerPrefab, transform.position, transform.rotation);
+        
+        if (Camera.main != null)
+        {
+            // Orientar el marcador hacia la cámara
+            marker.transform.LookAt(Camera.main.transform);
+
+            // Invertir para que el texto sea legible
+            marker.transform.Rotate(0, 180, 0);
+        }
+
+        // Establecer el daño en el marcador
+        ScoreMarker scoreMarker = marker.GetComponent<ScoreMarker>();
+        if (scoreMarker != null)
+            scoreMarker.SetScore(points);
 
         // Activar la animación de cierre
         animator.SetTrigger("close");

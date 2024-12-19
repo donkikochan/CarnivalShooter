@@ -173,6 +173,8 @@ MonoBehaviour:
   givesTime: 1
   givesNegativePoints: 1
   givesNegativeTime: 1
+  scoreMarkerPrefab: {fileID: 527521360724661629, guid: c1c359fc8b46c894982cb9d87ca9a71d, type: 3}
+  markerHeightOffset: 1
 --- !u!65 &6026661909380590379
 BoxCollider:
   m_ObjectHideFlags: 0
