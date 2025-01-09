@@ -84,7 +84,7 @@ public class Objectives : MonoBehaviour
                 timeController.AddTime(timeThatGives);
             }
         }
-
+        
         // Instanciar marcador de daño
         GameObject marker = Instantiate(scoreMarkerPrefab, transform.position, transform.rotation);
         
@@ -99,8 +99,17 @@ public class Objectives : MonoBehaviour
 
         // Establecer el daño en el marcador
         ScoreMarker scoreMarker = marker.GetComponent<ScoreMarker>();
+        String symbol = givesNegativePoints ? "-" : "+";
+        Color color = givesNegativePoints && !rechargesAmmo
+            ? new Color(255f / 255f, 40f / 255f, 40f / 255f, 255f / 255f) 
+            : new Color(100f / 255f, 255f / 255f, 70f / 255f, 255f / 255f);
+
         if (scoreMarker != null)
-            scoreMarker.SetScore(points);
+        {
+            scoreMarker.SetScore(symbol + points);
+            scoreMarker.SetColor(color);
+            scoreMarker.SetImage(rechargesAmmo);
+        }
 
         // Activar la animación de cierre
         animator.SetTrigger("close");
