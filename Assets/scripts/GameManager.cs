@@ -95,11 +95,11 @@ public class GameManager : MonoBehaviour
     private int givesTimePositive = 10;
     private int givesTimeNegative = 10;
     
-    // Sounds
-    [Header("Sound Controller")] 
-
+    [Header("Sound Controller")]
     public GameObject Ambience;
     public GameObject GameAmbience;
+    
+   
 
 
 
@@ -108,6 +108,8 @@ public class GameManager : MonoBehaviour
         tc = timeController.GetComponent<TimeController>();
         Ambience.SetActive(true);
         GameAmbience.SetActive(false);
+
+       
 
     }
 
@@ -163,8 +165,10 @@ public class GameManager : MonoBehaviour
                     ChangeCartelText("Game Starts in: \n\n" + Mathf.Max(0, Mathf.Ceil(startGameCountDown)) + " seconds");
                     startGameCountDown -= Time.deltaTime;
                     Invoke("StartGame", 5.0f);
-                    GameAmbience.SetActive(true);
+                    
                     Ambience.SetActive(false);
+                    GameAmbience.SetActive(true);
+                   
                 }
                 
                 AdjustSpawnProbabilities();
