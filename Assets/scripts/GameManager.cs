@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
     // Control de puntos ocupados
     private HashSet<int> occupiedSpawnPoints = new HashSet<int>();
 
-    private GameState gameState = GameState.STATE_MENU;
+    private GameState gameState = GameState.STATE_PLAYING;
     private TimeController tc;
     private GameObject[] instCoins = new GameObject[3];
     private PreviewWeapon currentPreviewWeapon = PreviewWeapon.DEAGLE;
@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
     private float startGameCountDown = 5f;
     private int givesTimePositive = 10;
     private int givesTimeNegative = 10;
+    private Coroutine spawnWavesCoroutine;
+    private bool showGameOver = true;
     
     [Header("Sound Controller")]
     public GameObject Ambience;
@@ -104,7 +106,6 @@ public class GameManager : MonoBehaviour
         tc = timeController.GetComponent<TimeController>();
         Ambience.SetActive(true);
         GameAmbience.SetActive(false);
-        
     }
 
     void Update()
@@ -137,7 +138,7 @@ public class GameManager : MonoBehaviour
                 if (!selectWeaponState.activeSelf)
                     selectWeaponState.SetActive(true);
                 
-                UpdateCartel("Use the Lever to change Weapon\n\nPress the Red Button to chose it");
+                UpdateCartel("Use the Lever to\n\nchange Weapon\n\nPress the Red Button\n\nto chose it");
 
                 UpdatePreviewWeapon();
                 
@@ -165,15 +166,30 @@ public class GameManager : MonoBehaviour
                    
                 }
                 
+                if (tc.HasEnded())
+                {
+                    gameState = GameState.STATE_ENDGAME;
+                    break;
+                }
+                
                 AdjustSpawnProbabilities();
                 
                 break;
             }
             case GameState.STATE_ENDGAME:
             {
+                StopCoroutine(spawnWavesCoroutine);
+                if (showGameOver)
+                {
+                    ChangeCartelText("The Game is Over");
+                    SetCartelState(true);
+                    showGameOver = false;
+                }
                 break;
             }
         }
+        
+        Debug.Log(gameState);
         /*if (Input.GetKeyDown(KeyCode.A))
         {
             animator.CrossFade("Give", 0f);
@@ -190,7 +206,7 @@ public class GameManager : MonoBehaviour
         if (!startCoroutineGame)
             return;
         
-        StartCoroutine(SpawnWaves());
+        spawnWavesCoroutine = StartCoroutine(SpawnWaves());
         SetCartelState(false);
         startCoroutineGame = false;
         tc.beginTimer = true;
@@ -429,49 +445,51 @@ public class GameManager : MonoBehaviour
     private void AdjustSpawnProbabilities()
     {
         int minutesRemaining = Mathf.FloorToInt(tc.GetTime() / 60); // Obtenemos los minutos restantes
+        int splitTime = tc.time / 3;
+        
 
         switch (GetPlacedCoin())
         {
             case 1: // GoldCoin (Fácil)
-                if (minutesRemaining <= 15 && minutesRemaining > 10)
+                if (minutesRemaining <= (splitTime * 3) && minutesRemaining > (splitTime * 2))
                 {
                     SetEasyGoldPhase();
                 }
-                else if (minutesRemaining <= 10 && minutesRemaining > 5)
+                else if (minutesRemaining <= (splitTime * 2) && minutesRemaining > splitTime)
                 {
                     SetModerateGoldPhase();
                 }
-                else if (minutesRemaining <= 5)
+                else if (minutesRemaining <= splitTime)
                 {
                     SetHardGoldPhase();
                 }
                 break;
 
             case 2: // SilverCoin (Media)
-                if (minutesRemaining <= 15 && minutesRemaining > 10)
+                if (minutesRemaining <= (splitTime * 3) && minutesRemaining > (splitTime * 2))
                 {
                     SetEasySilverPhase();
                 }
-                else if (minutesRemaining <= 10 && minutesRemaining > 5)
+                else if (minutesRemaining <= (splitTime * 2) && minutesRemaining > splitTime)
                 {
                     SetModerateSilverPhase();
                 }
-                else if (minutesRemaining <= 5)
+                else if (minutesRemaining <= splitTime)
                 {
                     SetHardSilverPhase();
                 }
                 break;
 
             case 3: // CopperCoin (Difícil)
-                if (minutesRemaining <= 15 && minutesRemaining > 10)
+                if (minutesRemaining <= (splitTime * 3) && minutesRemaining > (splitTime * 2))
                 {
                     SetEasyCopperPhase();
                 }
-                else if (minutesRemaining <= 10 && minutesRemaining > 5)
+                else if (minutesRemaining <= (splitTime * 2) && minutesRemaining > splitTime)
                 {
                     SetModerateCopperPhase();
                 }
-                else if (minutesRemaining <= 5)
+                else if (minutesRemaining <= splitTime)
                 {
                     SetHardCopperPhase();
                 }
@@ -497,10 +515,7 @@ public class GameManager : MonoBehaviour
     {
         Animator cartelAnimator = cartel.GetComponent<Animator>();
         
-        if (state)
-            cartelAnimator.SetTrigger("Open");
-        else
-            cartelAnimator.SetTrigger("Close");
+        cartelAnimator.SetTrigger(state ? "Open" : "Close");
     }
 
     private IEnumerator ChangeCartel(string newText)
