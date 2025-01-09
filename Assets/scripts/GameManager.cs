@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
                 if (!selectWeaponState.activeSelf)
                     selectWeaponState.SetActive(true);
                 
-                UpdateCartel("Use the Lever to change Weapon\n\nPress the Red Button to chose it");
+                UpdateCartel("Use the Lever to\n\nchange Weapon\n\nPress the Red Button\n\nto chose it");
 
                 UpdatePreviewWeapon();
                 
@@ -154,12 +154,20 @@ public class GameManager : MonoBehaviour
                     Invoke("StartGame", 5.0f);
                 }
                 
+                if (tc.HasEnded())
+                {
+                    gameState = GameState.STATE_ENDGAME;
+                    return;
+                }
+                
                 AdjustSpawnProbabilities();
                 
                 break;
             }
             case GameState.STATE_ENDGAME:
             {
+                StopAllCoroutines();
+                UpdateCartel("GAME OVER");
                 break;
             }
         }
