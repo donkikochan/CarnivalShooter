@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
                 if (!instCoins[2])
                     instCoins[2] = Instantiate(coins[2], coinSpawnPoints[2].position, coinSpawnPoints[2].rotation);
 
-                UpdateCartel("Grab a coin:\nGold = Easy mode\nSilver = Medium mode\nCopper = Hard mode");
+                UpdateCartel("Grab a coin:\n\nGold = Easy mode\n\nSilver = Medium mode\n\nCopper = Hard mode");
                 
                 break;
             }
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
                 if (!selectWeaponState.activeSelf)
                     selectWeaponState.SetActive(true);
                 
-                UpdateCartel("Use the Lever to change Weapon\nPress the Red Button to chose it");
+                UpdateCartel("Use the Lever to change Weapon\n\nPress the Red Button to chose it");
 
                 UpdatePreviewWeapon();
                 
@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
                 
                 if (startCoroutineGame)
                 {
-                    ChangeCartelText("Game Starts in: \n" + Mathf.Max(0, Mathf.Ceil(startGameCountDown)) + " seconds");
+                    ChangeCartelText("Game Starts in: \n\n" + Mathf.Max(0, Mathf.Ceil(startGameCountDown)) + " seconds");
                     startGameCountDown -= Time.deltaTime;
                     Invoke("StartGame", 5.0f);
                     GameAmbience.SetActive(true);
