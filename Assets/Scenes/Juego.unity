@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43940017, g: 0.48773295, b: 0.5679734, a: 1}
+  m_IndirectSpecularColor: {r: 0.43940106, g: 0.48773432, b: 0.5679747, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -21085,10 +21085,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5421526981406446774, guid: b53f628c2ba6645419ce3b43ea911d2a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b53f628c2ba6645419ce3b43ea911d2a, type: 3}
 --- !u!1001 &486977647
 PrefabInstance:
@@ -28798,7 +28795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beginTimer: 0
-  time: 900
+  time: 200
   timeText: {fileID: 983460730}
 --- !u!1001 &827236544
 PrefabInstance:
@@ -33795,10 +33792,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1134095877455891105, guid: 060006863d45ba6418b121606201d488, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 060006863d45ba6418b121606201d488, type: 3}
 --- !u!1 &1104463079
 GameObject:
@@ -36276,10 +36270,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1134095877455891105, guid: 060006863d45ba6418b121606201d488, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 060006863d45ba6418b121606201d488, type: 3}
 --- !u!1001 &1216993190
 PrefabInstance:
@@ -42826,10 +42817,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5312912517617444881, guid: d35700b72b64eca4b9e5dc18b8abc9af, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d35700b72b64eca4b9e5dc18b8abc9af, type: 3}
 --- !u!1001 &1541411870
 PrefabInstance:
@@ -46314,10 +46302,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5312912517617444881, guid: d35700b72b64eca4b9e5dc18b8abc9af, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d35700b72b64eca4b9e5dc18b8abc9af, type: 3}
 --- !u!1001 &1657174702
 PrefabInstance:
@@ -51602,10 +51587,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5421526981406446774, guid: b53f628c2ba6645419ce3b43ea911d2a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b53f628c2ba6645419ce3b43ea911d2a, type: 3}
 --- !u!1001 &1880469805
 PrefabInstance:
