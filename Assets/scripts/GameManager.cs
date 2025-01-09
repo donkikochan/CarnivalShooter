@@ -98,19 +98,13 @@ public class GameManager : MonoBehaviour
     [Header("Sound Controller")]
     public GameObject Ambience;
     public GameObject GameAmbience;
-    
-   
-
-
 
     void Start()
     {
         tc = timeController.GetComponent<TimeController>();
         Ambience.SetActive(true);
         GameAmbience.SetActive(false);
-
-       
-
+        
     }
 
     void Update()
