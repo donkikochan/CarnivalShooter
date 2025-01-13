@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Autohand;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] playerWeapons;
     public Transform playerMagazinePoint;
     public GameObject[] playerMagazines;
+    public GameObject gameOverState;
 
     [Header("Start Game")] 
     public GameObject cartel;
@@ -82,7 +84,7 @@ public class GameManager : MonoBehaviour
     // Control de puntos ocupados
     private HashSet<int> occupiedSpawnPoints = new HashSet<int>();
 
-    private GameState gameState = GameState.STATE_PLAYING;
+    private GameState gameState = GameState.STATE_MENU;
     private TimeController tc;
     private GameObject[] instCoins = new GameObject[3];
     private PreviewWeapon currentPreviewWeapon = PreviewWeapon.DEAGLE;
@@ -185,8 +187,9 @@ public class GameManager : MonoBehaviour
                 StopCoroutine(spawnWavesCoroutine);
                 if (showGameOver)
                 {
-                    ChangeCartelText("The Game is Over");
+                    ChangeCartelText("The Game is Over\n\nPress the button\n\nfor restart game");
                     SetCartelState(true);
+                    gameOverState.SetActive(true);
                     showGameOver = false;
                 }
                 break;
@@ -552,6 +555,11 @@ public class GameManager : MonoBehaviour
     public void UpdateCartel(string text)
     {
         StartCoroutine(ChangeCartel(text));
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     #region GoldCoin (Fácil)
