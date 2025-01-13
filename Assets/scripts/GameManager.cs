@@ -188,6 +188,7 @@ public class GameManager : MonoBehaviour
                 if (showGameOver)
                 {
                     ChangeCartelText("The Game is Over\n\nPress the button\n\nfor restart game");
+                    DestroyAll();
                     SetCartelState(true);
                     gameOverState.SetActive(true);
                     showGameOver = false;
@@ -597,7 +598,7 @@ public class GameManager : MonoBehaviour
         crioChance = 10; 
         damiselaChance = 15; 
         banqueroChance = 30; 
-        spawnSpeed = 1.0f; 
+        spawnSpeed = 0.5f; 
         enemiesPerWave = Random.Range(6, 12); 
         waveInterval = Random.Range(4f, 6f);
         givesTimePositive = 10;
@@ -612,7 +613,7 @@ public class GameManager : MonoBehaviour
         crioChance = 20; 
         damiselaChance = 20; 
         banqueroChance = 30; 
-        spawnSpeed = 1.2f; 
+        spawnSpeed = 0.5f; 
         enemiesPerWave = Random.Range(8, 14); 
         waveInterval = Random.Range(3f, 5f);
         givesTimePositive = 10;
@@ -644,7 +645,7 @@ public class GameManager : MonoBehaviour
         crioChance = 20; 
         damiselaChance = 30; 
         banqueroChance = 20; 
-        spawnSpeed = 1.2f; 
+        spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(10, 14); 
         waveInterval = Random.Range(3f, 5f);
         givesTimePositive = 7;
@@ -659,7 +660,7 @@ public class GameManager : MonoBehaviour
         crioChance = 30; 
         damiselaChance = 40; 
         banqueroChance = 40; 
-        spawnSpeed = 1.5f; 
+        spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(12, 16); 
         waveInterval = Random.Range(2f, 4f);
         givesTimePositive = 7;
@@ -677,7 +678,7 @@ public class GameManager : MonoBehaviour
         crioChance = 20; 
         damiselaChance = 20; 
         banqueroChance = 10; 
-        spawnSpeed = 1.0f; 
+        spawnSpeed = 1.2f; 
         enemiesPerWave = Random.Range(6, 12); 
         waveInterval = Random.Range(3f, 5f);
         givesTimePositive = 4;
@@ -707,7 +708,7 @@ public class GameManager : MonoBehaviour
         crioChance = 40; 
         damiselaChance = 50; 
         banqueroChance = 5; 
-        spawnSpeed = 1.5f; 
+        spawnSpeed = 1.2f; 
         enemiesPerWave = Random.Range(16, 18); 
         waveInterval = Random.Range(1f, 3f);
         givesTimePositive = 4;
