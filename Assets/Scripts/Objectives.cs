@@ -18,6 +18,8 @@ public class Objectives : MonoBehaviour
     
     private ScoreController scoreController;
     private TimeController timeController;
+    private AudioController AudioController;
+
     private Animator animator;
     private bool gotShot = false;
 
@@ -28,9 +30,10 @@ public class Objectives : MonoBehaviour
 
     private void Start()
     {
-        // Encuentra el ScoreController en la escena
+        // Encuentra los Controllers en la escena
         scoreController = FindObjectOfType<ScoreController>();
         timeController = FindObjectOfType<TimeController>();
+        AudioController = FindObjectOfType<AudioController>();
         animator = GetComponent<Animator>();
 
         if (scoreController == null)
@@ -50,11 +53,17 @@ public class Objectives : MonoBehaviour
         if (givesNegativePoints)
         {
             scoreController.RemoveScore(points);
+            AudioController.PlayImpactSound(ImpactSounds.NEGATIVE_HIT);
+
         }
         else
         {
             // Sumar puntos al ScoreController
             scoreController.AddScore(points);
+            AudioController.PlayImpactSound(ImpactSounds.POSITIVE_HIT);
+            AudioController.PlayImpactSound(ImpactSounds.DUCK_SOUND);
+
+
         }
 
         if (rechargesAmmo)
@@ -71,6 +80,8 @@ public class Objectives : MonoBehaviour
             
             if (spas)
                 spas.GetComponent<AutoGun>().SetAmmo(17);
+            
+            AudioController.PlayImpactSound(ImpactSounds.RELOAD_SOUND);
         }
 
         if (givesTime)

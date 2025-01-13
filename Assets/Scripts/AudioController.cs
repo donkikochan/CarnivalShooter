@@ -6,7 +6,6 @@ public enum ImpactSounds
 {
     POSITIVE_HIT,
     NEGATIVE_HIT,
-    SPECIAL_HIT,
     DUCK_SOUND,
     RELOAD_SOUND,
 }
@@ -39,6 +38,8 @@ public class AudioController : MonoBehaviour
     [Header("Mechanic Sounds")]
     public AudioClip[] mechanicSounds; // Clips de sonido de mecánicas
 
+    
+    
     // Reproducir un sonido de impacto
     public void PlayImpactSound(ImpactSounds sound)
     {
