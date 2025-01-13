@@ -102,12 +102,16 @@ public class GameManager : MonoBehaviour
     [Header("Sound Controller")]
     public GameObject Ambience;
     public GameObject GameAmbience;
+    private AudioController AudioController;
+
 
     void Start()
     {
         tc = timeController.GetComponent<TimeController>();
         Ambience.SetActive(true);
         GameAmbience.SetActive(false);
+        AudioController = FindObjectOfType<AudioController>();
+
     }
 
     void Update()
@@ -248,6 +252,9 @@ public class GameManager : MonoBehaviour
 
                 // Instancia el prefab
                 GameObject newObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+                
+                AudioController.PlaySpawnSound(SpawnSounds.DUCK_SPAWN);
+
                 newObject.GetComponent<Animator>().speed = spawnSpeed;
                 Objectives objObjective = newObject.GetComponent<Objectives>();
                 if (objObjective.givesNegativeTime)
@@ -538,12 +545,16 @@ public class GameManager : MonoBehaviour
         }
         
         cartelAnimator.SetTrigger("Close");
+        AudioController.PlaySpawnSound(SpawnSounds.SIGN_DESPAWN);
+
 
         yield return new WaitForSeconds(cartelAnimator.GetCurrentAnimatorStateInfo(0).length);
         
         cartelText.text = newText;
         
         cartelAnimator.SetTrigger("Open");
+        AudioController.PlaySpawnSound(SpawnSounds.SIGN_SPAWN);
+
 
         isAnimating = false;
     }
