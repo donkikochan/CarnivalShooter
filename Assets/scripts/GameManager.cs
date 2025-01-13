@@ -576,14 +576,14 @@ public class GameManager : MonoBehaviour
 
     private void SetEasyGoldPhase()
     {
-        bandidoChance = 50; 
+        bandidoChance = 60; 
         armeroChance = 20; 
-        secuazChance = 40; 
+        secuazChance = 50; 
         crioChance = 10; 
         damiselaChance = 10; 
-        banqueroChance = 20; 
-        spawnSpeed = 0.8f; 
-        enemiesPerWave = Random.Range(4, 8); 
+        banqueroChance = 10; 
+        spawnSpeed = 0.5f; 
+        enemiesPerWave = Random.Range(4, 7); 
         waveInterval = Random.Range(5f, 7f);
         givesTimePositive = 10;
         givesTimePositive = 10;
@@ -591,10 +591,10 @@ public class GameManager : MonoBehaviour
 
     private void SetModerateGoldPhase()
     {
-        bandidoChance = 60; 
-        armeroChance = 30; 
-        secuazChance = 50; 
-        crioChance = 15; 
+        bandidoChance = 50; 
+        armeroChance = 20; 
+        secuazChance = 40; 
+        crioChance = 10; 
         damiselaChance = 15; 
         banqueroChance = 30; 
         spawnSpeed = 1.0f; 
@@ -606,12 +606,12 @@ public class GameManager : MonoBehaviour
 
     private void SetHardGoldPhase()
     {
-        bandidoChance = 70; 
-        armeroChance = 40; 
+        bandidoChance = 40; 
+        armeroChance = 10; 
         secuazChance = 60; 
         crioChance = 20; 
         damiselaChance = 20; 
-        banqueroChance = 40; 
+        banqueroChance = 30; 
         spawnSpeed = 1.2f; 
         enemiesPerWave = Random.Range(8, 14); 
         waveInterval = Random.Range(3f, 5f);
@@ -624,11 +624,11 @@ public class GameManager : MonoBehaviour
     private void SetEasySilverPhase() 
     { 
         bandidoChance = 40; 
-        armeroChance = 30; 
+        armeroChance = 20; 
         secuazChance = 50; 
-        crioChance = 10; 
+        crioChance = 20; 
         damiselaChance = 15; 
-        banqueroChance = 25; 
+        banqueroChance = 15; 
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(5, 10); 
         waveInterval = Random.Range(4f, 6f);
@@ -638,12 +638,12 @@ public class GameManager : MonoBehaviour
 
     private void SetModerateSilverPhase()
     {
-        bandidoChance = 60; 
-        armeroChance = 40; 
+        bandidoChance = 30; 
+        armeroChance = 20; 
         secuazChance = 60; 
         crioChance = 20; 
-        damiselaChance = 20; 
-        banqueroChance = 30; 
+        damiselaChance = 30; 
+        banqueroChance = 20; 
         spawnSpeed = 1.2f; 
         enemiesPerWave = Random.Range(10, 14); 
         waveInterval = Random.Range(3f, 5f);
@@ -653,11 +653,11 @@ public class GameManager : MonoBehaviour
 
     private void SetHardSilverPhase()
     {
-        bandidoChance = 70; 
-        armeroChance = 50; 
+        bandidoChance = 40; 
+        armeroChance = 10; 
         secuazChance = 70; 
         crioChance = 30; 
-        damiselaChance = 25; 
+        damiselaChance = 40; 
         banqueroChance = 40; 
         spawnSpeed = 1.5f; 
         enemiesPerWave = Random.Range(12, 16); 
@@ -672,11 +672,11 @@ public class GameManager : MonoBehaviour
     private void SetEasyCopperPhase()
     {
         bandidoChance = 30; 
-        armeroChance = 40; 
-        secuazChance = 60; 
-        crioChance = 10; 
-        damiselaChance = 15; 
-        banqueroChance = 20; 
+        armeroChance = 20; 
+        secuazChance = 50; 
+        crioChance = 20; 
+        damiselaChance = 20; 
+        banqueroChance = 10; 
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(6, 12); 
         waveInterval = Random.Range(3f, 5f);
@@ -686,12 +686,12 @@ public class GameManager : MonoBehaviour
 
     private void SetModerateCopperPhase()
     {
-        bandidoChance = 50; 
-        armeroChance = 60; 
-        secuazChance = 70; 
-        crioChance = 25; 
-        damiselaChance = 25; 
-        banqueroChance = 35; 
+        bandidoChance = 40; 
+        armeroChance = 10; 
+        secuazChance = 30; 
+        crioChance = 30; 
+        damiselaChance = 40; 
+        banqueroChance = 10; 
         spawnSpeed = 1.2f; 
         enemiesPerWave = Random.Range(12, 16); 
         waveInterval = Random.Range(2f, 4f);
@@ -701,12 +701,12 @@ public class GameManager : MonoBehaviour
 
     private void SetHardCopperPhase()
     {
-        bandidoChance = 80; 
-        armeroChance = 80; 
-        secuazChance = 90; 
+        bandidoChance = 20; 
+        armeroChance = 0; 
+        secuazChance = 20; 
         crioChance = 40; 
-        damiselaChance = 35; 
-        banqueroChance = 50; 
+        damiselaChance = 50; 
+        banqueroChance = 5; 
         spawnSpeed = 1.5f; 
         enemiesPerWave = Random.Range(16, 18); 
         waveInterval = Random.Range(1f, 3f);

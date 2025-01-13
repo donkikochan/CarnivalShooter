@@ -26544,11 +26544,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4350654923722116, guid: 7d8de34e5ef49134da2071a4a9458c81, type: 3}
   m_PrefabInstance: {fileID: 742428272}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &742509647 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7942002210973373747, guid: a5226a72c9553294abfe172a458b5805, type: 3}
-  m_PrefabInstance: {fileID: 463362217}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &742623096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34467,10 +34462,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f8684fc1c4038c4f938d4f95673d8e3, type: 3}
   - {fileID: 8300000, guid: 52e021049025853498c2c8930dbb7cdf, type: 3}
   - {fileID: 8300000, guid: 677bc7eb414366541a1741f45495a6de, type: 3}
-  mechanicSounds:
-  - {fileID: 8300000, guid: 67aabcdd93e7ba14b91953d2da896b8b, type: 3}
-  - {fileID: 8300000, guid: a3f803231853927409b474ed3449b4d4, type: 3}
-  - {fileID: 8300000, guid: c965bcefef8e1d848975bb9f218f2b84, type: 3}
 --- !u!1001 &1137172953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56687,8 +56678,6 @@ GameObject:
   - component: {fileID: 2122093932}
   - component: {fileID: 2122093931}
   - component: {fileID: 2122093930}
-  - component: {fileID: 2122093933}
-  - component: {fileID: 2122093934}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -56782,118 +56771,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122093928}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!82 &2122093933
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122093928}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7b61d3770e413a546ac4a89b276e89d3, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.209
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 4
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &2122093934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122093928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 301171537c573544eab91d1d303ea219, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 742509647}
-  audioSource: {fileID: 2122093933}
-  maxDistance: 20
-  minDistance: 2
 --- !u!1001 &2124692866
 PrefabInstance:
   m_ObjectHideFlags: 0

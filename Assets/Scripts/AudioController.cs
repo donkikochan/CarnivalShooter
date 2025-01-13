@@ -18,12 +18,7 @@ public enum SpawnSounds
     SIGN_DESPAWN,
 }
 
-public enum MechanicSounds
-{
-    LEVEL_MOVEMENT,
-    BUTTON_DOWN,
-    BUTTON_UP,
-}
+
 
 public class AudioController : MonoBehaviour
 {
@@ -35,8 +30,7 @@ public class AudioController : MonoBehaviour
     [Header("Spawn Sounds")]
     public AudioClip[] spawnSounds; // Clips de sonidos de aparición
 
-    [Header("Mechanic Sounds")]
-    public AudioClip[] mechanicSounds; // Clips de sonido de mecánicas
+    
 
     
     
@@ -65,20 +59,6 @@ public class AudioController : MonoBehaviour
         else
         {
             Debug.LogWarning($"Spawn sound index {index} is out of range!");
-        }
-    }
-
-    // Reproducir un sonido de mecánica
-    public void PlayMechanicSound(MechanicSounds sound)
-    {
-        int index = (int)sound;
-        if (index >= 0 && index < mechanicSounds.Length)
-        {
-            audioSource.PlayOneShot(mechanicSounds[index]);
-        }
-        else
-        {
-            Debug.LogWarning($"Mechanic sound index {index} is out of range!");
         }
     }
 }
