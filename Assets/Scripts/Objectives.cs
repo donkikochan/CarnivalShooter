@@ -124,7 +124,6 @@ public class Objectives : MonoBehaviour
 
         // Activar la animación de cierre
         animator.SetTrigger("close");
-        AudioController.PlaySpawnSound(SpawnSounds.DUCK_DESSPAWN);
 
 
         // Obtener la duración de la animación `close`
