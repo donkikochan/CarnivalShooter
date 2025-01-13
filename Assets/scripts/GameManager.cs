@@ -526,6 +526,9 @@ public class GameManager : MonoBehaviour
         Animator cartelAnimator = cartel.GetComponent<Animator>();
         
         cartelAnimator.SetTrigger(state ? "Open" : "Close");
+        AudioController.PlaySpawnSound(state ? SpawnSounds.SIGN_SPAWN : SpawnSounds.SIGN_DESPAWN);
+
+        
     }
 
     private IEnumerator ChangeCartel(string newText)
