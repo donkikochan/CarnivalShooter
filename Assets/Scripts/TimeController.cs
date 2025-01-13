@@ -6,7 +6,7 @@ using TMPro;
 public class TimeController : MonoBehaviour
 {
     public bool beginTimer = false;
-    public int time = 900; // Tiempo inicial en segundos.
+    public int time = 300; // Tiempo inicial en segundos.
     private float currentTime; // Tiempo actual, con precisión decimal.
     public TextMeshPro timeText;
 
