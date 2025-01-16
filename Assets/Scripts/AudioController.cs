@@ -18,6 +18,13 @@ public enum SpawnSounds
     SIGN_DESPAWN,
 }
 
+public enum FaseSounds
+{
+    START_SOUND,
+    END_EFFECT,
+    END_SONG,
+}
+
 
 
 public class AudioController : MonoBehaviour
@@ -29,6 +36,9 @@ public class AudioController : MonoBehaviour
 
     [Header("Spawn Sounds")]
     public AudioClip[] spawnSounds; // Clips de sonidos de aparición
+    
+    [Header("Fase Sounds")]
+    public AudioClip[] faseSounds; // Clips de sonidos de las fases
 
     
 
@@ -55,6 +65,20 @@ public class AudioController : MonoBehaviour
         if (index >= 0 && index < spawnSounds.Length)
         {
             audioSource.PlayOneShot(spawnSounds[index]);
+        }
+        else
+        {
+            Debug.LogWarning($"Spawn sound index {index} is out of range!");
+        }
+    }
+    
+    // Reproducir un sonido de aparición
+    public void PlayFaseSounds(FaseSounds sound)
+    {
+        int index = (int)sound;
+        if (index >= 0 && index < faseSounds.Length)
+        {
+            audioSource.PlayOneShot(faseSounds[index]);
         }
         else
         {
