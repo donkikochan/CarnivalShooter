@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43940106, g: 0.48773432, b: 0.5679747, a: 1}
+  m_IndirectSpecularColor: {r: 0.43940017, g: 0.48773295, b: 0.5679734, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -34519,6 +34519,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f8684fc1c4038c4f938d4f95673d8e3, type: 3}
   - {fileID: 8300000, guid: 52e021049025853498c2c8930dbb7cdf, type: 3}
   - {fileID: 8300000, guid: 677bc7eb414366541a1741f45495a6de, type: 3}
+  faseSounds:
+  - {fileID: 8300000, guid: 71d39ed1d09a2384bbefd58ba542cb6d, type: 3}
+  - {fileID: 8300000, guid: e2d84cbcfdd4df7449048352475b6818, type: 3}
+  - {fileID: 8300000, guid: 9c38262a2ce3cdf4bbbf27a5f49dba7b, type: 3}
 --- !u!1001 &1137172953
 PrefabInstance:
   m_ObjectHideFlags: 0
