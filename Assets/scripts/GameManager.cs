@@ -192,6 +192,9 @@ public class GameManager : MonoBehaviour
                     SetCartelState(true);
                     gameOverState.SetActive(true);
                     showGameOver = false;
+                    GameAmbience.SetActive(false);
+                    AudioController.PlayFaseSounds(FaseSounds.END_EFFECT);
+                    Invoke("PlayEndGameMusic", 7.0f);
                 }
                 break;
             }
@@ -571,6 +574,12 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void PlayEndGameMusic()
+    {
+        AudioController.audioSource.clip = AudioController.faseSounds[(int)FaseSounds.END_SONG];
+        AudioController.audioSource.Play(0);
     }
     
     #region GoldCoin (Fácil)
