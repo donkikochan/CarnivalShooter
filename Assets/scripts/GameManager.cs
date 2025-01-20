@@ -103,6 +103,10 @@ public class GameManager : MonoBehaviour
     public GameObject Ambience;
     public GameObject GameAmbience;
     private AudioController AudioController;
+    
+    [Header("Nugguets")]
+    public GameObject Nugguets;
+   
 
 
     void Start()
@@ -111,6 +115,7 @@ public class GameManager : MonoBehaviour
         Ambience.SetActive(true);
         GameAmbience.SetActive(false);
         AudioController = FindObjectOfType<AudioController>();
+        Nugguets.SetActive(false);
 
     }
 
@@ -193,6 +198,8 @@ public class GameManager : MonoBehaviour
                     gameOverState.SetActive(true);
                     showGameOver = false;
                     GameAmbience.SetActive(false);
+                    
+                    Nugguets.SetActive(true);
                     AudioController.PlayFaseSounds(FaseSounds.END_EFFECT);
                     Invoke("PlayEndGameMusic", 7.0f);
                 }
