@@ -467,8 +467,10 @@ public class GameManager : MonoBehaviour
     
     private void AdjustSpawnProbabilities()
     {
-        int minutesRemaining = Mathf.FloorToInt(tc.GetTime() / 60); // Obtenemos los minutos restantes
+        int minutesRemaining = tc.GetTime(); // Obtenemos los minutos restantes
         int splitTime = tc.time / 3;
+        
+        Debug.Log("Minutes remaining: " + minutesRemaining);
         
 
         switch (GetPlacedCoin())
@@ -595,12 +597,12 @@ public class GameManager : MonoBehaviour
 
     private void SetEasyGoldPhase()
     {
-        bandidoChance = 0; 
-        armeroChance = 0; 
-        secuazChance = 0; 
-        crioChance = 0; 
-        damiselaChance = 0; 
-        banqueroChance = 0; 
+        bandidoChance = 60; 
+        armeroChance = 20; 
+        secuazChance = 50; 
+        crioChance = 10; 
+        damiselaChance = 10; 
+        banqueroChance = 10; 
         spawnSpeed = 0.5f; 
         enemiesPerWave = Random.Range(4, 7); 
         waveInterval = Random.Range(5f, 7f);
