@@ -603,7 +603,7 @@ public class GameManager : MonoBehaviour
         crioChance = 10; 
         damiselaChance = 10; 
         banqueroChance = 10; 
-        spawnSpeed = 0.5f; 
+        spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(4, 7); 
         waveInterval = Random.Range(5f, 7f);
         givesTimePositive = 10;
@@ -618,7 +618,7 @@ public class GameManager : MonoBehaviour
         crioChance = 10; 
         damiselaChance = 15; 
         banqueroChance = 30; 
-        spawnSpeed = 0.5f; 
+        spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(6, 12); 
         waveInterval = Random.Range(4f, 6f);
         givesTimePositive = 10;
@@ -633,7 +633,7 @@ public class GameManager : MonoBehaviour
         crioChance = 20; 
         damiselaChance = 20; 
         banqueroChance = 30; 
-        spawnSpeed = 0.5f; 
+        spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(8, 14); 
         waveInterval = Random.Range(3f, 5f);
         givesTimePositive = 10;
