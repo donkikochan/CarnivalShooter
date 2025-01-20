@@ -595,12 +595,12 @@ public class GameManager : MonoBehaviour
 
     private void SetEasyGoldPhase()
     {
-        bandidoChance = 60; 
-        armeroChance = 20; 
-        secuazChance = 50; 
-        crioChance = 10; 
-        damiselaChance = 10; 
-        banqueroChance = 10; 
+        bandidoChance = 0; 
+        armeroChance = 0; 
+        secuazChance = 0; 
+        crioChance = 0; 
+        damiselaChance = 0; 
+        banqueroChance = 0; 
         spawnSpeed = 0.5f; 
         enemiesPerWave = Random.Range(4, 7); 
         waveInterval = Random.Range(5f, 7f);
