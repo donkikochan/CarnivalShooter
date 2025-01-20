@@ -228,6 +228,8 @@ public class GameManager : MonoBehaviour
         SetCartelState(false);
         startCoroutineGame = false;
         tc.beginTimer = true;
+        AudioController.PlayFaseSounds(FaseSounds.START_SOUND);
+
     }
 
     // Corrutina para manejar oleadas
