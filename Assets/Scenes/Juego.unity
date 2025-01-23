@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43940017, g: 0.48773295, b: 0.5679734, a: 1}
+  m_IndirectSpecularColor: {r: 0.43940106, g: 0.48773432, b: 0.5679747, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3624,7 +3624,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8087264372736129424, guid: ce31c6bf710852a4a8ffd46e8e571b25, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1365551203082488794, guid: ce31c6bf710852a4a8ffd46e8e571b25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 671930954}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1368842357189823346, guid: ce31c6bf710852a4a8ffd46e8e571b25, type: 3}
       insertIndex: -1
@@ -3656,6 +3659,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7741965, y: 1.9939913, z: 0.54690325}
   m_Center: {x: -0.011397387, y: 0.9862258, z: 0.09347266}
+--- !u!4 &74320573 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1365551203082488794, guid: ce31c6bf710852a4a8ffd46e8e571b25, type: 3}
+  m_PrefabInstance: {fileID: 74320567}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &81066549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30746,6 +30754,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4205360097430266, guid: 32f4aa73b9d6d0543a1f6802ac435dad, type: 3}
   m_PrefabInstance: {fileID: 670104540}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &671930953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 671930954}
+  m_Layer: 0
+  m_Name: AlcaldeSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &671930954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671930953}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.000000014901161, z: 0, w: 1}
+  m_LocalPosition: {x: 0.02102661, y: 1.8050385, z: 0.09100342}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 74320573}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &679603439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37067,6 +37106,8 @@ MonoBehaviour:
   crio: {fileID: 1275225803589463611, guid: fe81fb0cb6777d9448d83daec766d838, type: 3}
   damisela: {fileID: 6168489718059140791, guid: 8c14d52b05c355e498bf4bbfd36efdaf, type: 3}
   banquero: {fileID: 3750770906003945028, guid: ad41c96d7a887d9429d74c95f458c610, type: 3}
+  alcalde: {fileID: 2775030207433578100, guid: 8df5634fe2f0f3a4f92d9626ee52afa3, type: 3}
+  alcaldePoint: {fileID: 671930953}
   shopKeeper: {fileID: 74320568}
   bandidoChance: 50
   armeroChance: 30
@@ -37074,6 +37115,7 @@ MonoBehaviour:
   crioChance: 20
   damiselaChance: 20
   banqueroChance: 10
+  alcaldeChance: 20
   spawnSpeed: 1
   spawnPoints:
   - {fileID: 1750553451}
@@ -37138,7 +37180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973421266}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

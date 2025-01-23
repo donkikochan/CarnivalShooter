@@ -13,6 +13,7 @@ public class Objectives : MonoBehaviour
     public bool givesTime = false;
     public bool givesNegativePoints = false;
     public bool givesNegativeTime = false;
+    public bool movable = false;
     public GameObject scoreMarkerPrefab;
     public float markerHeightOffset = 2f;
     
@@ -39,6 +40,11 @@ public class Objectives : MonoBehaviour
         if (scoreController == null)
         {
             Debug.LogError("No se encontró un ScoreController en la escena.");
+        }
+        
+        if (movable)
+        {
+            animator.SetBool("move", true);
         }
 
         // Inicia la destrucción automática después de 5 segundos

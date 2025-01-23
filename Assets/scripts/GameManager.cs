@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public GameObject crio;
     public GameObject damisela;
     public GameObject banquero;
+    public GameObject alcalde;
+    public GameObject alcaldePoint;
     public GameObject shopKeeper;
 
     // Probabilidades de aparición
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
     [Range(0, 100)] public int crioChance = 15;
     [Range(0, 100)] public int damiselaChance = 10;
     [Range(0, 100)] public int banqueroChance = 30;
+    [Range(0, 100)] public int alcaldeChance = 10;
     [Range(1, 2)] public float spawnSpeed = 1;
 
     // Configuración de puntos de spawn
@@ -84,7 +87,7 @@ public class GameManager : MonoBehaviour
     // Control de puntos ocupados
     private HashSet<int> occupiedSpawnPoints = new HashSet<int>();
 
-    private GameState gameState = GameState.STATE_MENU;
+    private GameState gameState = GameState.STATE_PLAYING;
     private TimeController tc;
     private GameObject[] instCoins = new GameObject[3];
     private PreviewWeapon currentPreviewWeapon = PreviewWeapon.DEAGLE;
@@ -293,7 +296,7 @@ public class GameManager : MonoBehaviour
     private GameObject GetRandomPrefab()
     {
         // Suma todas las probabilidades
-        int totalChance = bandidoChance + armeroChance + secuazChance + crioChance + damiselaChance + banqueroChance;
+        int totalChance = bandidoChance + armeroChance + secuazChance + crioChance + damiselaChance + banqueroChance + alcaldeChance;
         int randomValue = Random.Range(0, totalChance);
 
         // Selección en función del rango de probabilidades
@@ -315,6 +318,16 @@ public class GameManager : MonoBehaviour
         }
         else if (randomValue < bandidoChance + armeroChance + secuazChance + crioChance + damiselaChance)
         {
+            return damisela;
+        }
+        else if (randomValue < bandidoChance + armeroChance + secuazChance + crioChance + damiselaChance + alcaldeChance)
+        {
+            GameObject alcaldeInstance = Instantiate(alcalde,  alcaldePoint.transform);
+            alcalde.transform.SetParent(alcaldePoint.transform);
+            
+            alcaldeInstance.transform.localPosition = Vector3.zero;
+            alcaldeInstance.transform.localRotation = Quaternion.identity;
+            
             return damisela;
         }
         else
@@ -603,6 +616,7 @@ public class GameManager : MonoBehaviour
         crioChance = 10; 
         damiselaChance = 10; 
         banqueroChance = 10; 
+        alcaldeChance = 20;
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(4, 7); 
         waveInterval = Random.Range(5f, 7f);
@@ -617,7 +631,8 @@ public class GameManager : MonoBehaviour
         secuazChance = 40; 
         crioChance = 10; 
         damiselaChance = 15; 
-        banqueroChance = 30; 
+        banqueroChance = 30;
+        alcaldeChance = 15;
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(6, 12); 
         waveInterval = Random.Range(4f, 6f);
@@ -633,6 +648,7 @@ public class GameManager : MonoBehaviour
         crioChance = 20; 
         damiselaChance = 20; 
         banqueroChance = 30; 
+        alcaldeChance = 10;
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(8, 14); 
         waveInterval = Random.Range(3f, 5f);
@@ -650,6 +666,7 @@ public class GameManager : MonoBehaviour
         crioChance = 20; 
         damiselaChance = 15; 
         banqueroChance = 15; 
+        alcaldeChance = 15;
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(5, 10); 
         waveInterval = Random.Range(4f, 6f);
@@ -665,6 +682,7 @@ public class GameManager : MonoBehaviour
         crioChance = 20; 
         damiselaChance = 30; 
         banqueroChance = 20; 
+        alcaldeChance = 10;
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(10, 14); 
         waveInterval = Random.Range(3f, 5f);
@@ -680,6 +698,7 @@ public class GameManager : MonoBehaviour
         crioChance = 30; 
         damiselaChance = 40; 
         banqueroChance = 40; 
+        alcaldeChance = 5;
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(12, 16); 
         waveInterval = Random.Range(2f, 4f);
@@ -698,6 +717,7 @@ public class GameManager : MonoBehaviour
         crioChance = 20; 
         damiselaChance = 20; 
         banqueroChance = 10; 
+        alcaldeChance = 10;
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(6, 12); 
         waveInterval = Random.Range(3f, 5f);
@@ -713,6 +733,7 @@ public class GameManager : MonoBehaviour
         crioChance = 30; 
         damiselaChance = 40; 
         banqueroChance = 10; 
+        alcaldeChance = 5;
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(12, 16); 
         waveInterval = Random.Range(2f, 4f);
@@ -728,6 +749,7 @@ public class GameManager : MonoBehaviour
         crioChance = 40; 
         damiselaChance = 50; 
         banqueroChance = 5; 
+        alcaldeChance = 1;
         spawnSpeed = 1.0f; 
         enemiesPerWave = Random.Range(16, 18); 
         waveInterval = Random.Range(1f, 3f);
