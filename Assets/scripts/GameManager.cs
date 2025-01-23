@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     // Control de puntos ocupados
     private HashSet<int> occupiedSpawnPoints = new HashSet<int>();
 
-    private GameState gameState = GameState.STATE_PLAYING;
+    private GameState gameState = GameState.STATE_MENU;
     private TimeController tc;
     private GameObject[] instCoins = new GameObject[3];
     private PreviewWeapon currentPreviewWeapon = PreviewWeapon.DEAGLE;

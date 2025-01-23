@@ -1576,7 +1576,7 @@ MonoBehaviour:
   grabType: 1
   grabPoseType: 0
   handType: 0
-  singleHandOnly: 0
+  singleHandOnly: 1
   instantGrab: 0
   useGentleGrab: 0
   maintainGrabOffset: 0
